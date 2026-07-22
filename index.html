@@ -252,16 +252,16 @@
       position: relative;
       top: 0;
       left: 0;
-      transform: none !important; /* Force stop JS from shifting it */
+      transform: none !important; 
       width: 100%;
       max-width: 100%;
-      height: 450px;
-      margin: 0 auto 40px; 
-      opacity: 0.9;
+      height: 65vh; /* Bigger and perfect fit for mobile screens */
+      margin: 0 auto 20px; 
+      opacity: 0.95;
     }
     .hero-img-wrap img {
-      object-fit: contain; 
-      object-position: center top;
+      object-fit: cover; /* Cover the screen neatly */
+      object-position: top center; /* Keep face visible at top */
       -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
     }
@@ -296,7 +296,8 @@
   </a>
   <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
-    <a href="#skills">Skills</a>
+    <a href="#software">Tools</a>
+    <a href="#ai-skills">AI Skills</a>
     <a href="#experience">Work</a>
     <a href="#gallery">Gallery</a>
     <a href="#brand">Identity</a>
@@ -336,6 +337,7 @@
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <div class="section-header reveal">
@@ -368,10 +370,11 @@
     </div>
   </section>
 
-  <section id="skills">
+  <!-- SOFTWARE & TOOLS -->
+  <section id="software">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 02 · Toolkit</div>
+        <div class="section-label"><span class="line"></span> 02 · Software & Tools</div>
         <h2 class="section-title">Tools that <em>shape</em> the<br>idea into form.</h2>
       </div>
       <div class="skills-grid">
@@ -395,24 +398,57 @@
           <div class="name">CapCut</div>
           <div class="cat">Editing · Social</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI SKILLS & WORKFLOW (Separate Section) -->
+  <section id="ai-skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 03 · AI Skills & Workflow</div>
+        <h2 class="section-title">Merging <em>creativity</em><br>with artificial intelligence.</h2>
+      </div>
+      <div class="skills-grid">
         <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-comments"></i></div>
           <div class="name">ChatGPT</div>
           <div class="cat">Copy · Ideation</div>
         </div>
         <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-robot"></i></div>
+          <div class="name">Gemini</div>
+          <div class="cat">AI Assistant</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-diagram-project"></i></div>
+          <div class="name">Google Flow</div>
+          <div class="cat">AI Video</div>
+        </div>
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-image"></i></div>
           <div class="name">Midjourney</div>
           <div class="cat">Generative Art</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div class="name">Magnific</div>
+          <div class="cat">AI Upscaling</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-book"></i></div>
+          <div class="name">NotebookLM</div>
+          <div class="cat">AI Research</div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 03 · Experience</div>
+        <div class="section-label"><span class="line"></span> 04 · Experience</div>
         <h2 class="section-title">A trajectory through <em>creative</em> space.</h2>
       </div>
       <div class="timeline">
@@ -472,10 +508,11 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
   <section id="gallery">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 04 · Visual Gallery</div>
+        <div class="section-label"><span class="line"></span> 05 · Visual Gallery</div>
         <h2 class="section-title">Selected <em>visuals</em> from<br>the portfolio.</h2>
       </div>
       <div class="gallery-grid">
@@ -525,10 +562,11 @@
     </div>
   </section>
 
+  <!-- MOTION -->
   <section id="motion">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 05 · Motion & Storytelling</div>
+        <div class="section-label"><span class="line"></span> 06 · Motion & Storytelling</div>
         <h2 class="section-title">Visuals in <em>motion</em><br>and stories.</h2>
         <p class="section-desc">A collection of motion graphics, promotional videos, and storytelling visual history designed for Wafilife and other creative campaigns.</p>
       </div>
@@ -540,10 +578,11 @@
     </div>
   </section>
 
+  <!-- BRAND IDENTITY -->
   <section id="brand">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 06 · Brand Identity</div>
+        <div class="section-label"><span class="line"></span> 07 · Brand Identity</div>
         <h2 class="section-title">Crafting <em>identities</em><br>from scratch.</h2>
       </div>
       <div class="gallery-grid">
@@ -583,10 +622,11 @@
     </div>
   </section>
 
+  <!-- EDUCATION -->
   <section id="education">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label"><span class="line"></span> 07 · Education</div>
+        <div class="section-label"><span class="line"></span> 08 · Education</div>
         <h2 class="section-title">Foundations in <em>science</em>,<br>fluent in <em>design</em>.</h2>
       </div>
       <div class="edu-grid">
@@ -618,10 +658,11 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="contact-wrap reveal">
-        <div class="section-label" style="justify-content: center;"><span class="line"></span> 08 · Contact</div>
+        <div class="section-label" style="justify-content: center;"><span class="line"></span> 09 · Contact</div>
         <h2 class="section-title">Let's create something<br><em>worth the orbit.</em></h2>
         <div class="contact-links">
           <a href="mailto:sdfahim4200@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> sdfahim4200@gmail.com</a>
