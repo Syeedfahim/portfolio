@@ -294,6 +294,12 @@
     font-weight: 700;
     color: #fff;
   }
+  .gallery-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-top: 8px;
+  }
   .gallery-external-icon {
     position: absolute;
     top: 20px; right: 20px;
@@ -341,29 +347,13 @@
     border: 0;
   }
 
-  /* Brand Identity Section */
+  /* Brand Identity Section - Updated to Gallery Style */
   .brand-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
     margin-top: 40px;
   }
-  .brand-card {
-    padding: 32px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    backdrop-filter: blur(20px);
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-  }
-  .brand-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--primary), var(--glow)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
-  .brand-card:hover::before { transform: scaleX(1); }
-  .brand-card:hover { border-color: var(--glow); background: rgba(0, 24, 79, 0.3); transform: translateY(-5px); }
-  .brand-card h3 { font-family: 'Syne'; font-size: 24px; margin-bottom: 10px; font-weight: 700; }
-  .brand-card p { color: var(--muted); font-size: 15px; line-height: 1.6; }
-  .brand-card .tag { display: inline-block; padding: 4px 12px; background: rgba(74, 108, 247, 0.1); border: 1px solid rgba(74, 108, 247, 0.3); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--glow); margin-top: 18px; text-transform: uppercase; letter-spacing: 0.1em; }
 
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; }
   .edu-card { padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(20px); transition: all 0.3s; position: relative; overflow: hidden; }
@@ -820,7 +810,7 @@
     </div>
   </section>
 
-  <!-- BRAND IDENTITY -->
+  <!-- BRAND IDENTITY (Gallery Format) -->
   <section id="brand">
     <div class="section-label reveal">
       <span class="line"></span>
@@ -837,21 +827,61 @@
     </div>
 
     <div class="brand-grid">
-      <div class="brand-card reveal">
-        <h3>Aiyaan Lifestyle</h3>
-        <p>Complete brand identity design, including logo, color palette, typography, and packaging direction for a premium gifts and home decor brand.</p>
-        <span class="tag">Logo · Packaging · Direction</span>
-      </div>
-      <div class="brand-card reveal">
-        <h3>Lust Manager</h3>
-        <p>Modern and sleek visual identity development for a digital platform, focusing on minimalist UI aesthetics and clear brand communication.</p>
-        <span class="tag">Digital · Typography</span>
-      </div>
-      <div class="brand-card reveal">
-        <h3>Connecting Disorder</h3>
-        <p>Empathetic and impactful visual branding for a youth-led voluntary organization supporting individuals with communication disorders.</p>
-        <span class="tag">Campaign · Awareness</span>
-      </div>
+      <!-- Frizo -->
+      <a href="https://www.facebook.com/frizobd" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <!-- Replace src with Frizo Logo Image -->
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_EhvnBb2iixey1lc28DP0wXfSHY6RTwqMXlNLvvFPqu_NlroUAwDpuVAqMhLeW3d4dZfR53vVia2IMYpZjEmUvWPdg7wzXZwIMNevVa611rrranv38WS-7y1tVI3xSWYFX9_HJBPG1YPo2phsRkTMZ0yV5OJFD1PSrD19QnA4FEKxRXVuILGyQ-dqzXBNtvE_27WN2jIluTwSCKm_DzUlkVWUcYjUqjBK3UrB5jiRc-GeH1Qv7IrkkvUg38H1towPCPDLHOorxyHp2Jl_UbVEa3I26VEJ7k-FsQAkDEw7VHQJRvQHoQ2_PgcBlT7bevrHWdnXulSO8NNZaYOw7LNH6VtA8bIlsHOLzvvOz00bhNhwp_afkSCsqME2pIb3BPcyK6btnFDJvruhbB9neQ5578PGj1-Nj7lj860UZXFv4qczQDEeMe8Lk4dnSUPPdw5CnZwqz1HLAyRp-BZbQqrLjjiRWXyKgrACgHVM1tezNpEd-EBoKGtX3x1drqRtCJRoxIzLPZSHbIyFD7xTILXR6tpFZUoMjCgajrzMSk0RJJxmskohbDC_AKA1vHwP8zw1yrnaTLqUUmyAYyWqZL5o59StANcn9stMYvUaEPejYp0-2XTSuv-tLK1-Xhsh_UnZSumxJMVPiMXESuz7smgKU6Ac1cPc56NP6RxSM96Y3uUKPqilyj4ZkZzxftmsp6mpE6eQQqy3fCgM3QWq1c-jGJEgZH8LquKeYSDMKIOFgDVsFgr5_SoJtkOuUnSTJC7SQvT8yFnqxrbjK03aZ8u_XGP4fvtV20KzsdiDDCoQizBv4ajwmT-xuZpxdYkF951FpZ0oyOPCEEFksL1mczrNUtXGWBbAQI6px2CixqWFbSkX3hbyc1CrGhKdqkn8Vcsbqg3OhU24SYkfoO05iSY9YkJGZbQ4WpkDxI357nvVoWRALRWNXrTyv3Xvbj0ZiMFOckiB2WMqhdlR-qljzuT9aPFlaVzB72KB9q-_GwEzLWs8MrDEJdmgnLTgum_2HmzZYTQQnxkRjJvZspcoa5LHV0lIQVA-JtxzfduK8xGhJMOFKEOXl2v40xcA8TBv-jsKuL6Ege9gW-y_lP6U3JzAI82gMzJLMrmmPYdb2iUJIjZ7r1rDPH0Ce6kKOairyCog=w1920-h911?auditContext=prefetch">
+          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Branding · Logo Design</div>
+            <div class="gallery-title">Frizo</div>
+            <div class="gallery-desc">A modern and refreshing brand identity designed for Frizo, focusing on clean typography and a vibrant palette.</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ecommetrix -->
+      <a href="https://www.facebook.com/ecommetrix/" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <!-- Replace src with Ecommetrix Logo Image -->
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_EN7Ixvxa3vGEA5JeUoZG5DtU2NiOMEIREO0GTHqX9r8KiHFWlmAmWpo8LhCcbj-OE6MOX1XcPPmH5UqW58ktbgUtsVzRkvrMMuXLU3PO_oZArmAXk-8iRy3_JwDHSFhHPx5zLZ7fZ6hzOvNBg8f1dBd3e2AuYe82Bz05ULLTtyjYpcLtLbefWVlxyNlsHzs7TopSxx5wqiYAA7G6uu-uSP3SymXtg6Jv0pSX1GZLNLiKPhWRxjxtQJhSiTWxwuszl4pj7k1FpR4gzkMG3BI35fp_y7Mu_wHGpBOqdZabToUPC90bDBp7Z-DDIRSJLYJee12rj563GgeXA6Y5B-mDHKwZJ0VlSjXKSL5Cuq_f433nX6vQWIAwPy3ScgOuVLq6PqrlH4dbNuIoqL_qYCF7SYE-ItOl7weExCDFfwZc42c97wAjbc2tFPkNbrqw2V8RtxsMKAsQ9-nXIrDXnUT4AYbBaUHhj7zzESWWafMVA3oYIIOfrba5Lqg5h5NevCKpXGOzc_eWX-nE75mzlm75o2P8aoel3NuiyuGc20E51-f3uGhxzOK4tkenGWk1jm14QJ4fqHwPiIKt-FRnSisOlEw3jdddocX2YAvx-4SU0C-EOW_EBpb2ASocpEsyim-fVVos_onnMO8NMVjP9Dm6aUPrWNTQAjTpFkeXbVDtHFrHSxOPx19XCc3xfI2fX7uxzLSVP9d-I1z0I87rFGQmYptCbl9BNJi2FjrbOJENYq8uCkWUZnb6tKJryYO9XP7zmFEwIyhrP5LQiwY0WCbAImb3N9Y8B_YZFd151Iz6qIGqBzLUhzQ9RDiQLEwI_ZN8ywvu6N3iQwhwsibIe6lMl8r6xRoSt4mk4gj5P4WnQwl4AralMQjCvSVHMw1SiEbIaHcgxGOKM_DGggoVJx_3DlliUEOwDNk09Rs76AOxWje_ohvO6P5GM40m2ygtX7yq186biz5YiHO6ll3rs9MJRNzxseq01Dz3d8ES7nyr55Wz0DmZqrDwgPvu9Sbah0bihlBUNUAS6l-eX3U0OEcSKnufuAIsewNoTt_PYVg_9bPWiyiSC8v7657kIJeQVeK9UZS50qyg9JFUbmCwFUhSP02aBt--5Kg2BHJrs_ujmz7XrXHEaCAi02IwPHVP4aIlc=w1920-h911?auditContext=prefetch">
+          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Corporate · Visual Identity</div>
+            <div class="gallery-title">Ecommetrix</div>
+            <div class="gallery-desc">Complete visual identity for Ecommetrix, an e-commerce solutions provider, featuring a sleek and corporate logo design.</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 5menstudio -->
+      <a href="https://www.facebook.com/fivemenstudiobd" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <!-- Replace src with 5menstudio Logo Image -->
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_Eo_fpP_dBt_rFvKH2lw74mhwJpy0uQJXq6v0J6FV1a4sNNH-6ID1kSsU-i3dVU6nL-vnpZ5VaVe9V9FEbT6DObt1FP2o_4dKHdOuMk8Qk_1sKg_FnBA0sqXX149zcOjNxy1QrQL4soYKuPA6rR8FtFo65nd8x1ricpqP1t7w_a49MeLfbI-q4cWEBL5cyqFK1_gDDgUTjFREsRRHLESEbx14rPnfoxXHjB2776LLc85lBPJQ5nexGdYxyJQttJy6UJ4UmLQDIDjQ2N_kByo9FTEmP8vGufrlmbYdUH-8bPLkDDlZrUZqfx-57h4rQpjt7sBUSQ4cnShYn4m7bEfMsRTC1T1PiaVIRslCUbpF6jSnfkFg9R-sBfEG61ez3xyBgVi0HKGXTY7H2i4PH7wrZFyrRtuCpfcZa2SeBM68Ph2G0rrzbg7wdt_oSXq67TU3tIvcv4UCZFBa0fcz5lTNZvAFoGisd_XNtJ5QoZm_UK683V-eKxsAMmWgFrLWPu9qOeR92Lj_cnKPEsxXQ0Ss79_VsklELBp3csQIBN3cFNM5YBq4a61qIOnVv-fxCwd3Ujt36CoX8s-LzRkmxmXIYozysf62lpZlNdKJF5X1cQ8sT4BJRv95aHbPumAWi7TfczW8yJBZTwt0IWjkSF-TXtp-5ukgnLaV4Hf87SPBSnTh4OFQuaYJnzVL9YswZQqS6KrFxj0EBTxOouqVYoPrxGz045IHvPCjVR6PGv0P2NP9nnPBcUsuFtBDrMWXr-xeUEE5ntzb9nYhGia1MFYJylktMI3wVijkyCnDhG2j5s2hhVLBgTICVKyz0LcUwJ7ervgem7pLqIh3JLe2vk9vQd9alSLpdomqBiEvqEa-ats41m8EZu8YwpBqkl19MEFvl6UUkvBw3bxLE9kvR_CM7CtuUl2GODr0crCRLeBGXJGNdPW48WYzylij8QiptHpN05W1sutDyAlPAg8bd8MgdTzscLoI5RvsRvqWoIPYTDVgInAStj5FOu12Ok4ixJK1KIEkb_Qf0q4roqt-_gf0fDRaFpBjO9nvTuFaIDDtO5a_AiCkTbkzQHyowpPzhwfEtm8R74dqVjFbBPAp6NyB3igoi72ZShnY-uKCu31XWA_t_cxfschcbFiPw7B13XzwM=w1920-h911?auditContext=prefetch">
+          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Creative · Studio Branding</div>
+            <div class="gallery-title">5menstudio</div>
+            <div class="gallery-desc">Creative logo and brand identity for 5menstudio, a dynamic production house, emphasizing a minimalist and bold aesthetic.</div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Aiyaan -->
+      <a href="https://www.facebook.com/shopaiyaan" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <!-- Replace src with Aiyaan Logo Image -->
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FNewfQtsyeUjhQ7QNrZUmu4536EXdkiTHLxy995k2vX6OhkY9L8AdaQPZ63GXExRqDCd2qmZ_G_URon7vZY0XotCX7wRN3-wCZ_1k2ArjNdKO68JUXg1HcCsUI0SlHVGU5qFICOeZyLO0dARiWMfJV_DqqVzEHxGgJdVYzuA9cjVatZPvKLcQ_Z7BIE151RRDQy0Xq8Riz1ubrx5a0yF8mfUW1ZGr9GKTmY0J4BMchcoNGqRIBErfJXpiXjaZSuXut-Vr_goTTNgynknhacSAaDHg9MrWUvrwM-UB7J89zeNmoVTyOtPanCrAwo0_rhgNyFTXOXEuXkzcLxEiVR9sFiKyR6Cl85bs1eOl4O1cUVZZ7wwEkBpJQSCw5y49pCpRJEiTKXJc0rxF4Cu6R7Jp4vXL1IXqzk4SDIW8ao5_X0N1-gSk5aRXjcn0XIwBGQ1xxATvDUTJvDzaV5QAOOA6neC5DFde788Xq710cFZp7NlKQnHm2J4jpaCKiYoOr2l9LNb_QBhhGWb-Vr8jGWX302EIGbHDHfcKu9f75zZP4cDqAyrQliw_6nvzI_yDwuNSyEK8pVofA_J8G4F29MdLXhJy9t3VHFtUDpFdATo6cKSqb02DP8QXBOhv1mLqBjlLJKD5WA5nigmWdc3q53jh2gz_U7XvKRFrWrdOPRgOGNEKBNqTIGG2lUAuKlyV3Br44M2eDZyHQwRTZE7ZP_MBKjmpKKRkyzm58FBRNp6rncSWs_DTG9-72eZkuWKxu-7BNa3I6zWg3MsycBU7p-diCkWc2nt1cADqe7eBgiBPS8XXrA-OOHpW1nLYI8LJsuY8L3auvSjDQGZfz8PlaE5og4BYXMw_K2D2ebB884_r5nakQvIwfEfKrXvOMQO-RsPJ58HYVdj8bwuDYMCfe2UeJnzKRNM8dzvV-EAk-RCQ8Fmg3Et93flhb2doUOodnMpYHodM1JEZKELTqL4R5Mirr90JmBc_XFygjFA1i8rHXLhztrv8HBFFqxpLnivqnp2cvfraCymN9LrJtSCy43Hswqlgrfxg7cd45y2k66mo9yxO-EGm6EZlzOXRn_Gzc6iDaAsZN1FV4-DL4JcwoRj06OhzOnn-c2TcyZU2APk0IUnjMOI7JLDplIJS7VEoGxwk=w1920-h911?auditContext=prefetch">
+          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Lifestyle · Packaging</div>
+            <div class="gallery-title">Aiyaan</div>
+            <div class="gallery-desc">Complete brand identity design, including logo, color palette, typography, and packaging direction for a premium lifestyle brand.</div>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
