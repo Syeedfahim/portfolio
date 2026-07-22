@@ -4,431 +4,245 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Syeed Hossain Fahim — Content Developer & Designer</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
-  }
-}
-</script>
 <style>
   :root {
-    --bg: #000000;
-    --bg-2: #03060f;
-    --primary: #00184F;
-    --primary-light: #0A2472;
-    --accent: #1E40AF;
-    --glow: #4A6CF7;
-    --text: #FFFFFF;
-    --muted: #8B92A8;
-    --muted-2: #4A5061;
+    --bg-dark: #01040c;
+    --bg-blue: #04327f;
+    --glow-blue: #1e5fc5;
+    --text: #ffffff;
+    --text-soft: #e0e6f0;
+    --muted: #8a9bb8;
     --border: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(74, 108, 247, 0.3);
-    --surface: rgba(0, 24, 79, 0.15);
+    --glass: rgba(255, 255, 255, 0.02);
+    --glass-hover: rgba(255, 255, 255, 0.05);
+    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; background: var(--bg); }
+  html { scroll-behavior: smooth; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text-soft);
+    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
     cursor: none;
+    background-color: var(--bg-dark);
+    background-image: linear-gradient(to bottom, rgba(1,4,12,0.6), rgba(4,50,127,0.3)), url('https://z-cdn-media.chatglm.cn/files/06939182-a5a6-4a73-ab7b-298bb146d133.png?auth_key=1884707972-75e8a3b31e6d446499bd45eb680b4fa6-0-82d8c60d3b0f845fad04468306936874');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
   }
 
-  .display { font-family: 'Syne', sans-serif; letter-spacing: -0.03em; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
+  /* Custom Cursor */
+  .cursor-dot, .cursor-ring {
+    position: fixed; pointer-events: none; z-index: 9999;
+    border-radius: 50%; transform: translate(-50%, -50%);
+  }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+  .cursor-ring.expand { width: 60px; height: 60px; border-color: var(--glow-blue); background: rgba(30, 95, 197, 0.05); }
+  @media (max-width: 768px) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none; } }
 
-  #webgl {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
+  /* Dynamic Soft Orbs */
+  .orb {
+    position: fixed; border-radius: 50%; filter: blur(120px);
+    z-index: -1; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .vignette {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 1;
-    background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 20%, rgba(0,0,0,0.85) 100%);
-  }
-  .grain {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 2;
-    opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
-  }
+  .orb-1 { width: 600px; height: 600px; background: var(--bg-blue); top: -200px; left: -200px; opacity: 0.3; }
+  .orb-2 { width: 500px; height: 500px; background: var(--glow-blue); bottom: -100px; right: -100px; opacity: 0.2; }
 
   main { position: relative; z-index: 3; }
-
-  section {
-    min-height: 100vh;
-    padding: 140px 6vw 80px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .cursor-dot, .cursor-ring {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    mix-blend-mode: difference;
-  }
-  .cursor-dot { width: 6px; height: 6px; background: #fff; transition: transform 0.15s ease; }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.4);
-    transition: transform 0.25s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-  }
-  .cursor-ring.expand { width: 80px; height: 80px; border-color: var(--glow); }
-  @media (max-width: 768px) {
-    body { cursor: auto; }
-    .cursor-dot, .cursor-ring { display: none; }
-  }
+  /* Reduced section padding to close gaps */
+  section { padding: 80px 6vw; position: relative; }
+  
+  .container { max-width: 1200px; margin: 0 auto; width: 100%; }
 
   .scroll-progress {
     position: fixed; top: 0; left: 0; height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--glow), #fff);
-    z-index: 100; width: 0%;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 12px var(--glow);
+    background: linear-gradient(90deg, var(--bg-blue), var(--glow-blue), #fff);
+    z-index: 100; width: 0%; box-shadow: 0 0 10px var(--glow-blue);
   }
 
   nav.topnav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-    padding: 24px 6vw;
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 50; width: calc(100% - 48px); max-width: 1200px;
+    padding: 14px 28px;
     display: flex; justify-content: space-between; align-items: center;
-    background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
-    backdrop-filter: blur(12px);
-  }
-  .logo { font-family: 'Syne'; font-weight: 700; font-size: 18px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-  .logo-mark {
-    width: 36px; height: 36px; background: var(--primary);
-    border: 1px solid var(--glow); border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-weight: 800; font-size: 13px;
-    box-shadow: 0 0 20px rgba(74, 108, 247, 0.4);
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .logo:hover .logo-mark { transform: rotate(360deg); }
-  .logo-text { display: flex; flex-direction: column; line-height: 1; }
-  .logo-text small { font-size: 10px; color: var(--muted); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; font-family: 'JetBrains Mono';}
-
-  .nav-links { display: flex; gap: 36px; align-items: center; }
-  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.3s; position: relative; }
-  .nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 50%; width: 0; height: 1px; background: var(--glow); transition: all 0.3s; transform: translateX(-50%); }
-  .nav-links a:hover { color: var(--text); }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    padding: 10px 22px; background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border-strong); color: var(--text) !important;
-    border-radius: 100px; font-size: 13px; font-weight: 500;
-    text-decoration: none; transition: all 0.3s; backdrop-filter: blur(10px);
-  }
-  .nav-cta:hover { background: var(--primary); border-color: var(--glow); box-shadow: 0 0 20px rgba(74, 108, 247, 0.3); }
-  .nav-cta::after { display: none; }
-  .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 22px; cursor: none; }
-
-  .side-nav { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 16px; }
-  .side-nav .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: none; transition: all 0.3s; position: relative; }
-  .side-nav .dot.active { background: var(--glow); transform: scale(1.5); box-shadow: 0 0 12px var(--glow); }
-  .side-nav .dot::before { content: attr(data-label); position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); white-space: nowrap; opacity: 0; transition: opacity 0.3s; letter-spacing: 0.1em; text-transform: uppercase; }
-  .side-nav .dot:hover::before { opacity: 1; }
-  @media (max-width: 900px) { .side-nav { display: none; } }
-
-  .section-label { display: flex; align-items: center; gap: 14px; font-family: 'JetBrains Mono'; font-size: 12px; color: var(--glow); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 32px; font-weight: 500; }
-  .section-label .line { width: 50px; height: 1px; background: linear-gradient(90deg, var(--glow), transparent); }
-  .section-label .num { color: var(--muted); }
-
-  .hero { padding-top: 160px; }
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 8px 18px; background: rgba(74, 108, 247, 0.08); border: 1px solid rgba(74, 108, 247, 0.25); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--glow); margin-bottom: 36px; backdrop-filter: blur(10px); width: fit-content; }
-  .pulse { width: 7px; height: 7px; background: var(--glow); border-radius: 50%; box-shadow: 0 0 0 0 var(--glow); animation: pulse 2s infinite; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74, 108, 247, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(74, 108, 247, 0); } 100% { box-shadow: 0 0 0 0 rgba(74, 108, 247, 0); } }
-
-  .hero-title { font-family: 'Syne'; font-weight: 800; font-size: clamp(56px, 10vw, 160px); line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 36px; }
-  .hero-title .light { font-weight: 400; color: var(--muted); }
-  .hero-title .accent { background: linear-gradient(120deg, #FFFFFF 0%, #A0B4FF 50%, #00184F 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
-
-  .hero-sub { font-size: clamp(16px, 1.4vw, 19px); max-width: 580px; color: var(--muted); line-height: 1.6; margin-bottom: 44px; }
-  .hero-sub strong { color: var(--text); font-weight: 600; }
-
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 80px; }
-  .btn { padding: 16px 32px; border-radius: 100px; font-weight: 600; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); border: none; cursor: none; letter-spacing: 0.02em; font-family: 'Space Grotesk', sans-serif; }
-  .btn-primary { background: var(--primary); color: var(--text); border: 1px solid var(--glow); box-shadow: 0 8px 30px rgba(0, 24, 79, 0.6); }
-  .btn-primary:hover { transform: translateY(-3px); background: var(--primary-light); box-shadow: 0 14px 40px rgba(74, 108, 247, 0.4); }
-  .btn-ghost { background: rgba(255,255,255,0.03); color: var(--text); border: 1px solid var(--border-strong); backdrop-filter: blur(10px); }
-  .btn-ghost:hover { background: rgba(74, 108, 247, 0.1); border-color: var(--glow); transform: translateY(-3px); }
-
-  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 36px; border-top: 1px solid var(--border); max-width: 900px; }
-  .stat .num { font-family: 'Syne'; font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1; background: linear-gradient(180deg, #FFFFFF 0%, var(--muted) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .stat .label { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 8px; }
-
-  .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: center; max-width: 1400px; }
-  .about-image-wrap { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; }
-  .about-image-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--primary), var(--glow), #000); border-radius: 26px; z-index: -1; opacity: 0.6; filter: blur(20px); }
-  .about-image-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; filter: grayscale(0.2) contrast(1.1); transition: transform 0.6s; }
-  .about-image-wrap:hover img { transform: scale(1.04); }
-  .about-image-tag { position: absolute; bottom: 20px; left: 20px; padding: 10px 16px; background: rgba(0,0,0,0.7); backdrop-filter: blur(20px); border: 1px solid var(--border-strong); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-  .about-image-tag .live { width: 6px; height: 6px; background: var(--glow); border-radius: 50%; box-shadow: 0 0 8px var(--glow); animation: pulse 2s infinite; }
-
-  .about-heading { font-family: 'Syne'; font-size: clamp(36px, 5vw, 64px); font-weight: 700; line-height: 1; margin-bottom: 28px; letter-spacing: -0.03em; }
-  .about-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
-  .about-bio { font-size: 17px; line-height: 1.7; color: var(--muted); margin-bottom: 28px; }
-  .about-bio strong { color: var(--text); font-weight: 600; }
-  .about-bio + .about-bio { margin-bottom: 36px; }
-
-  .facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
-  .fact { padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; backdrop-filter: blur(20px); transition: all 0.3s; }
-  .fact:hover { border-color: var(--glow); transform: translateY(-3px); background: rgba(0, 24, 79, 0.3); }
-  .fact .label { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 6px; }
-  .fact .value { font-size: 15px; font-weight: 600; color: var(--text); }
-  .fact .value i { color: var(--glow); margin-right: 8px; }
-
-  .skills-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 30px; }
-  .skills-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; max-width: 800px; }
-  .skills-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
-  .skills-intro { color: var(--muted); max-width: 320px; line-height: 1.6; font-size: 15px; }
-
-  .skill-group { margin-bottom: 50px; }
-  .skill-group-title { font-family: 'JetBrains Mono'; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.18em; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-  .skill-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
-  .skill-card { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
-  .skill-card:hover { transform: translateY(-6px); border-color: var(--glow); background: rgba(0, 24, 79, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-  .skill-card .icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(74, 108, 247, 0.1); border: 1px solid rgba(74, 108, 247, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--glow); margin-bottom: 16px; transition: all 0.4s; }
-  .skill-card:hover .icon { background: var(--primary); color: #fff; transform: scale(1.08) rotate(-6deg); box-shadow: 0 0 16px rgba(74, 108, 247, 0.4); }
-  .skill-card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .skill-card .category { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-
-  .exp-header { margin-bottom: 60px; }
-  .exp-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; }
-  .exp-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
-
-  .timeline { position: relative; max-width: 1100px; margin: 0 auto; width: 100%; }
-  .timeline::before { content: ''; position: absolute; left: 200px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent 0%, var(--border-strong) 8%, var(--border-strong) 92%, transparent 100%); }
-  .timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: 60px; padding: 28px 0; position: relative; transition: all 0.3s; }
-  .timeline-item::before { content: ''; position: absolute; left: 196px; top: 40px; width: 9px; height: 9px; background: var(--bg); border: 2px solid var(--glow); border-radius: 50%; z-index: 2; transition: all 0.3s; }
-  .timeline-item:hover::before { background: var(--glow); box-shadow: 0 0 16px var(--glow); transform: scale(1.3); }
-  .timeline-item:hover .timeline-content { border-color: var(--glow); transform: translateX(8px); background: rgba(0, 24, 79, 0.2); }
-  .timeline-date { font-family: 'JetBrains Mono'; font-size: 13px; color: var(--glow); padding-top: 32px; padding-right: 20px; text-align: right; }
-  .timeline-date .now { display: inline-block; padding: 2px 8px; background: var(--glow); color: var(--bg); border-radius: 4px; font-size: 10px; margin-left: 6px; font-weight: 700; }
-  .timeline-content { padding: 28px 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(20px); transition: all 0.4s; }
-  .timeline-role { font-family: 'Syne'; font-size: 22px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
-  .timeline-company { color: var(--glow); font-size: 14px; margin-bottom: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
-  .timeline-company i { font-size: 11px; }
-  .timeline-desc { color: var(--muted); font-size: 14px; line-height: 1.65; }
-  .timeline-desc ul { list-style: none; padding: 0; }
-  .timeline-desc li { padding: 4px 0 4px 18px; position: relative; }
-  .timeline-desc li::before { content: '→'; position: absolute; left: 0; color: var(--glow); font-weight: 700; }
-
-  .gallery-header { margin-bottom: 60px; }
-  .gallery-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; }
-  .gallery-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .gallery-link { text-decoration: none; color: inherit; display: block; }
-  .gallery-item {
-    position: relative;
-    aspect-ratio: 4/5;
-    border-radius: 16px;
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--border);
-    cursor: none;
-    transition: all 0.4s;
-    background: var(--bg-2);
+    border-radius: 100px;
   }
-  .gallery-item:hover {
-    border-color: var(--glow);
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  }
-  .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s, filter 0.4s;
-    filter: grayscale(0.3) contrast(1.1);
-  }
-  .gallery-item:hover img {
-    transform: scale(1.08);
-    filter: grayscale(0) contrast(1.2);
-  }
-  .gallery-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.9) 100%);
+  .logo { font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
+  .logo-mark { width: 36px; height: 36px; background: var(--bg-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; }
+  .logo-text small { font-size: 10px; color: var(--muted); font-weight: 300; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 2px;}
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { padding: 10px 22px; background: #fff; color: var(--bg-dark) !important; border-radius: 100px; font-size: 13px; font-weight: 600; text-decoration: none; transition: transform 0.3s; }
+  .nav-cta:hover { transform: scale(1.05); }
+  .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 20px; cursor: none; }
+
+  /* Hero Section */
+  .hero {
+    min-height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 24px;
-    opacity: 1;
-    transition: opacity 0.3s;
-  }
-  .gallery-cat {
-    font-family: 'JetBrains Mono';
-    font-size: 10px;
-    color: var(--glow);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 6px;
-  }
-  .gallery-title {
-    font-family: 'Syne';
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-  }
-  .gallery-desc {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.5;
-    margin-top: 8px;
-  }
-  .gallery-external-icon {
-    position: absolute;
-    top: 20px; right: 20px;
-    width: 36px; height: 36px;
-    background: rgba(0,0,0,0.6);
-    border: 1px solid var(--border-strong);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--glow);
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.3s;
-  }
-  .gallery-item:hover .gallery-external-icon {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Motion & Video Section */
-  .motion-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
-  }
-  .video-card {
+    padding-top: 100px;
+    padding-bottom: 40px; /* Reduced bottom padding */
     position: relative;
-    aspect-ratio: 16/9;
-    border-radius: 16px;
     overflow: hidden;
-    border: 1px solid var(--border);
-    transition: all 0.4s;
-    background: var(--bg-2);
   }
-  .video-card:hover {
-    border-color: var(--glow);
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  
+  /* Increased Image Size */
+  .hero-img-wrap {
+    position: absolute;
+    top: 40px; /* Moved up to make image bigger */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1100px; /* Increased width */
+    height: 85vh;
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .video-card iframe {
+  .hero-img-wrap img {
     width: 100%;
     height: 100%;
-    border: 0;
+    object-fit: contain;
+    object-position: bottom center;
+    mix-blend-mode: darken; 
+    filter: contrast(1.1) saturate(1.1) drop-shadow(0 10px 40px rgba(4, 50, 127, 0.4));
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
 
-  /* Brand Identity Section - Updated to Gallery Style */
-  .brand-grid {
+  .hero-content {
+    position: relative;
+    z-index: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: end;
+  }
+  
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--muted); margin-bottom: 24px; backdrop-filter: blur(10px); font-weight: 300; }
+  .pulse { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 70% { box-shadow: 0 0 0 10px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
+
+  .hero-title { font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
+  .hero-title span { background: linear-gradient(120deg, #FFFFFF 0%, #A0B4FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-right p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; font-weight: 300; }
+  .hero-right p strong { color: var(--text); font-weight: 500; }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn { padding: 14px 30px; border-radius: 100px; font-weight: 500; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-smooth); border: 1px solid transparent; cursor: none; }
+  .btn-primary { background: #fff; color: var(--bg-dark); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.15); }
+  .btn-ghost { background: rgba(255,255,255,0.03); color: var(--text); border-color: var(--border); backdrop-filter: blur(10px); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+
+  /* Section Header - Reduced bottom margin */
+  .section-header { margin-bottom: 50px; max-width: 800px; }
+  .section-label { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--glow-blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
+  .section-label .line { width: 30px; height: 1px; background: var(--glow-blue); }
+  .section-title { font-size: clamp(36px, 5vw, 56px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--text); }
+  .section-title em { font-style: normal; color: var(--muted); font-weight: 300; }
+  .section-desc { color: var(--muted); font-size: 16px; line-height: 1.8; margin-top: 20px; font-weight: 300; }
+
+  .glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    transition: var(--transition-smooth);
   }
 
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; }
-  .edu-card { padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(20px); transition: all 0.3s; position: relative; overflow: hidden; }
-  .edu-card::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--glow), transparent); transition: width 0.4s; }
-  .edu-card:hover { transform: translateY(-4px); border-color: var(--border-strong); background: rgba(0, 24, 79, 0.3); }
-  .edu-card:hover::before { width: 100%; }
-  .edu-period { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--glow); letter-spacing: 0.12em; margin-bottom: 12px; text-transform: uppercase; }
-  .edu-degree { font-family: 'Syne'; font-size: 22px; font-weight: 700; margin-bottom: 6px; line-height: 1.15; letter-spacing: -0.01em; }
-  .edu-school { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
-  .edu-school i { color: var(--glow); margin-right: 8px; }
-  .edu-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-  .edu-pill { padding: 4px 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
-  .edu-pill.gpa { background: rgba(74, 108, 247, 0.1); border-color: rgba(74, 108, 247, 0.3); color: var(--glow); }
+  .about-text p { font-size: 17px; line-height: 1.8; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+  .fact { padding: 24px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; transition: var(--transition-smooth); }
+  .fact:hover { background: var(--glass-hover); transform: translateY(-4px); }
+  .fact .label { font-size: 11px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; }
+  .fact .value { font-size: 16px; font-weight: 500; color: var(--text); }
 
-  .contact-wrap { max-width: 1200px; margin: 0 auto; width: 100%; }
-  .contact-heading { font-family: 'Syne'; font-size: clamp(48px, 8vw, 130px); font-weight: 700; line-height: 0.88; letter-spacing: -0.04em; margin-bottom: 50px; }
-  .contact-heading em { font-style: italic; font-weight: 400; background: linear-gradient(120deg, #fff, var(--glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; }
-  .contact-info { display: flex; flex-direction: column; gap: 14px; }
-  .contact-link { display: flex; align-items: center; gap: 18px; padding: 22px 26px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(20px); text-decoration: none; color: var(--text); transition: all 0.3s; }
-  .contact-link:hover { border-color: var(--glow); transform: translateX(8px); background: rgba(0, 24, 79, 0.3); }
-  .contact-link .icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(74, 108, 247, 0.1); border: 1px solid rgba(74, 108, 247, 0.2); display: flex; align-items: center; justify-content: center; color: var(--glow); font-size: 18px; flex-shrink: 0; }
-  .contact-link .label { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 4px; }
-  .contact-link .value { font-size: 16px; font-weight: 600; }
-  .contact-link .arrow { margin-left: auto; color: var(--muted); transition: all 0.3s; }
-  .contact-link:hover .arrow { color: var(--glow); transform: translateX(4px) rotate(-45deg); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .skill-card { padding: 28px; }
+  .skill-card:hover { border-color: rgba(255,255,255,0.15); background: var(--glass-hover); transform: translateY(-5px); }
+  .skill-card .icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; margin-bottom: 20px; }
+  .skill-card .name { font-weight: 500; font-size: 17px; margin-bottom: 4px; color: var(--text); }
+  .skill-card .cat { font-size: 12px; color: var(--muted); font-weight: 300; }
 
-  .contact-form { padding: 36px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; backdrop-filter: blur(20px); }
-  .form-title { font-family: 'Syne'; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
-  .form-sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
-  .form-group { margin-bottom: 18px; }
-  .form-group label { display: block; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px; }
-  .form-group input, .form-group textarea { width: 100%; padding: 14px 16px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 14px; transition: all 0.3s; cursor: none; }
-  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--glow); background: rgba(0,0,0,0.8); box-shadow: 0 0 0 4px rgba(74, 108, 247, 0.1); }
-  .form-group textarea { resize: vertical; min-height: 110px; }
-  .form-submit { width: 100%; padding: 16px; background: var(--primary); color: var(--text); border: 1px solid var(--glow); border-radius: 10px; font-weight: 700; font-size: 14px; cursor: none; transition: all 0.3s; letter-spacing: 0.02em; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; }
-  .form-submit:hover { transform: translateY(-2px); background: var(--primary-light); box-shadow: 0 12px 30px rgba(74, 108, 247, 0.3); }
+  .timeline { position: relative; border-left: 1px solid var(--border); padding-left: 40px; margin-left: 20px; }
+  .timeline-item { position: relative; margin-bottom: 40px; } /* Reduced margin */
+  .timeline-item::before { content: ''; position: absolute; left: -45px; top: 10px; width: 10px; height: 10px; background: var(--bg-dark); border: 2px solid var(--glow-blue); border-radius: 50%; }
+  .timeline-date { font-size: 12px; color: var(--glow-blue); margin-bottom: 12px; font-weight: 400; }
+  .timeline-content { padding: 28px; }
+  .timeline-content:hover { background: var(--glass-hover); }
+  .timeline-role { font-size: 20px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
+  .timeline-company { color: var(--glow-blue); font-size: 14px; margin-bottom: 16px; font-weight: 300; }
+  .timeline-desc { color: var(--muted); font-size: 14px; line-height: 1.7; font-weight: 300; }
+  .timeline-desc ul { list-style: none; }
+  .timeline-desc li { padding-left: 18px; position: relative; margin-bottom: 8px; }
+  .timeline-desc li::before { content: '→'; position: absolute; left: 0; color: var(--glow-blue); }
 
-  footer { padding: 50px 6vw 30px; border-top: 1px solid var(--border); position: relative; z-index: 3; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); }
-  .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-  .footer-copy { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
-  .footer-socials { display: flex; gap: 12px; }
-  .footer-socials a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--muted); text-decoration: none; transition: all 0.3s; }
-  .footer-socials a:hover { background: var(--primary); color: #fff; border-color: var(--glow); transform: translateY(-3px); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 24px; }
+  .gallery-item { position: relative; aspect-ratio: 16/10; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); opacity: 0.85; }
+  .gallery-item:hover img { transform: scale(1.04); opacity: 1; }
+  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%); padding: 32px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .gallery-cat { font-size: 10px; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; font-weight: 400; }
+  .gallery-title { font-size: 22px; font-weight: 500; color: #ffffff; }
+  .gallery-desc { font-size: 13px; color: rgba(255, 255, 255, 0.7); margin-top: 8px; line-height: 1.5; font-weight: 300; }
 
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  #brand .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  #brand .gallery-item { aspect-ratio: 4 / 5; }
+
+  .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px; }
+  .video-card { aspect-ratio: 16/9; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); }
+  .video-card iframe { width: 100%; height: 100%; border: 0; }
+
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .edu-card { padding: 32px; }
+  .edu-card:hover { background: var(--glass-hover); }
+  .edu-period { font-size: 12px; color: var(--glow-blue); margin-bottom: 14px; font-weight: 400; }
+  .edu-degree { font-size: 20px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+  .edu-school { color: var(--muted); font-size: 14px; margin-bottom: 18px; font-weight: 300; }
+  .edu-pill { display: inline-block; padding: 5px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-size: 11px; color: var(--muted); font-weight: 400; }
+  .edu-pill.gpa { color: #4ade80; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.05); }
+
+  .contact-wrap { max-width: 800px; margin: 0 auto; text-align: center; }
+  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 50px; }
+  .contact-link { display: flex; align-items: center; gap: 10px; padding: 14px 26px; background: var(--glass); border: 1px solid var(--border); border-radius: 100px; color: var(--text); text-decoration: none; transition: var(--transition-smooth); backdrop-filter: blur(10px); font-weight: 400; font-size: 14px; }
+  .contact-link:hover { background: var(--glass-hover); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+
+  footer { padding: 40px 6vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); font-weight: 300; }
+  .footer-socials a { color: var(--muted); margin-left: 16px; text-decoration: none; transition: color 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+  .footer-socials a:hover { color: #fff; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
-  .reveal:nth-child(2) { transition-delay: 0.1s; }
-  .reveal:nth-child(3) { transition-delay: 0.2s; }
-  .reveal:nth-child(4) { transition-delay: 0.3s; }
-
-  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(120px); padding: 16px 28px; background: var(--primary); border: 1px solid var(--glow); color: var(--text); border-radius: 12px; font-weight: 600; font-size: 14px; z-index: 1000; box-shadow: 0 14px 40px rgba(74, 108, 247, 0.3); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; align-items: center; gap: 10px; }
-  .toast.show { transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-toggle { display: block; }
-    .nav-links.open { display: flex; position: absolute; top: 70px; right: 6vw; flex-direction: column; background: rgba(0,0,0,0.95); padding: 24px; border-radius: 16px; border: 1px solid var(--border); gap: 16px; }
-    .about-grid { grid-template-columns: 1fr; gap: 50px; }
-    .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    .timeline::before { left: 8px; }
-    .timeline-item { grid-template-columns: 1fr; gap: 12px; }
-    .timeline-item::before { left: 4px; top: 12px; }
-    .timeline-date { padding-top: 0; padding-right: 0; text-align: left; padding-left: 28px; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: rgba(0,0,0,0.9); padding: 20px; border-radius: 20px; gap: 16px; }
+    .hero-img-wrap { height: 50vh; opacity: 0.6; }
+    .hero-content { grid-template-columns: 1fr; gap: 30px; }
     .edu-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    section { padding: 100px 5vw 60px; }
-  }
-  @media (max-width: 600px) {
     .gallery-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    section { padding: 60px 5vw; }
   }
 </style>
 </head>
@@ -436,23 +250,10 @@
 
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<div class="orb orb-1" id="orb1"></div>
+<div class="orb orb-2" id="orb2"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<canvas id="webgl"></canvas>
-<div class="vignette"></div>
-<div class="grain"></div>
-
-<div class="side-nav" id="sideNav">
-  <button class="dot active" data-label="Singularity" data-section="hero"></button>
-  <button class="dot" data-label="About" data-section="about"></button>
-  <button class="dot" data-label="Toolkit" data-section="skills"></button>
-  <button class="dot" data-label="Trajectory" data-section="experience"></button>
-  <button class="dot" data-label="Gallery" data-section="gallery"></button>
-  <button class="dot" data-label="Motion" data-section="motion"></button>
-  <button class="dot" data-label="Identity" data-section="brand"></button>
-  <button class="dot" data-label="Education" data-section="education"></button>
-  <button class="dot" data-label="Contact" data-section="contact"></button>
-</div>
 
 <nav class="topnav">
   <a href="#hero" class="logo">
@@ -464,12 +265,10 @@
   </a>
   <div class="nav-links" id="navLinks">
     <a href="#about">About</a>
-    <a href="#skills">Toolkit</a>
-    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Work</a>
     <a href="#gallery">Gallery</a>
-    <a href="#motion">Motion</a>
     <a href="#brand">Identity</a>
-    <a href="#education">Education</a>
     <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="nav-cta">Let's Talk</a>
   </div>
   <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
@@ -477,533 +276,313 @@
 
 <main>
 
-  <!-- HERO -->
   <section id="hero" class="hero">
-    <div class="reveal">
-      <div class="hero-eyebrow">
-        <span class="pulse"></span>
-        Available for Work · Dhaka, Bangladesh
+    <div class="hero-img-wrap reveal" id="heroImage">
+      <img src="https://z-cdn-media.chatglm.cn/files/0ba41af6-836b-432f-9256-e0e550ebdf2b.png?auth_key=1884706798-d364523f01924a7f9aaba6d03ff49115-0-562e9c473a60a8b3157e6ef00492df03" alt="Syeed Hossain Fahim">
+    </div>
+
+    <div class="container">
+      <div class="hero-content reveal">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="pulse"></span>
+            Available for Work · Dhaka
+          </div>
+          <h1 class="hero-title">Visual <span>Storyteller</span><br>& Content Developer</h1>
+        </div>
+        <div class="hero-right">
+          <p>I'm <strong>Syeed Hossain Fahim</strong> — blending design and content development. Currently serving as Content Developer at <strong>lustmanager.com</strong>, while exploring the intersection of AI, visuals, and storytelling.</p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn btn-primary">
+              View Work <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="btn btn-ghost">
+              LinkedIn <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-    <h1 class="hero-title reveal">
-      <span class="light">visual</span><br>
-      <span class="accent">cosmologist</span><br>
-      <span>shaping</span> <span class="light">stories</span>
-    </h1>
-    <p class="hero-sub reveal">
-      I'm <strong>Syeed Hossain Fahim</strong> — a creative professional blending design and content development. Currently serving as <strong>Content Developer at Lust Manager.com</strong>, while exploring the intersection of AI, visuals, and storytelling.
-    </p>
-    <div class="hero-actions reveal">
-      <a href="#gallery" class="btn btn-primary">
-        View Selected Work
-        <i class="fas fa-arrow-right"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="btn btn-ghost">
-        Connect on LinkedIn
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </div>
-    <div class="hero-stats reveal">
-      <div class="stat"><div class="num">3+</div><div class="label">Years Creating</div></div>
-      <div class="stat"><div class="num">5</div><div class="label">Creative Roles</div></div>
-      <div class="stat"><div class="num">1</div><div class="label">Brand Founded</div></div>
-      <div class="stat"><div class="num">∞</div><div class="label">Ideas in Orbit</div></div>
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">01</span>
-      <span>About</span>
-    </div>
-    <div class="about-grid">
-      <div class="about-image-wrap reveal">
-        <img src="https://z-cdn-media.chatglm.cn/files/16a1b88d-604f-48e9-859b-a45e19a08410.jpg?auth_key=1884679067-83f7db99a3c54086b9513d0a535610fb-0-ceb4fb2342e2973023455b69a06049a9" alt="Syeed Hossain Fahim portrait" />
-        <div class="about-image-tag">
-          <span class="live"></span>
-          Tejgaon, Dhaka
-        </div>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 01 · About</div>
+        <h2 class="section-title">Designing at the edge of <em>art</em> and <em>strategy</em>.</h2>
       </div>
-      <div>
-        <h2 class="about-heading reveal">
-          Designing at the edge of <em>art</em> and <em>strategy</em>.
-        </h2>
-        <p class="about-bio reveal">
-          I'm a creative and results-driven professional with a strong foundation in graphic design and content development. I deliver high-quality visual content and strategic narratives for e-commerce, social media, and brand campaigns.
-        </p>
-        <p class="about-bio reveal">
-          Proficient in <strong>Adobe Photoshop, Illustrator, After Effects, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.
-        </p>
-        <div class="facts-grid reveal">
+      <div class="about-text reveal">
+        <p>I'm a creative and results-driven professional with a strong foundation in graphic design and content development. I deliver high-quality visual content and strategic narratives for e-commerce, social media, and brand campaigns.</p>
+        <p>Proficient in <strong>Adobe Photoshop, Illustrator, After Effects, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.</p>
+        
+        <div class="facts-grid">
           <div class="fact">
             <div class="label">Currently</div>
-            <div class="value"><i class="fas fa-briefcase"></i>Lust Manager.com</div>
+            <div class="value"><i class="fas fa-briefcase" style="margin-right:8px; color:var(--glow-blue);"></i>lustmanager.com</div>
           </div>
           <div class="fact">
             <div class="label">Founded</div>
-            <div class="value"><i class="fas fa-store"></i>Aiyaan Lifestyle Brand</div>
+            <div class="value"><i class="fas fa-store" style="margin-right:8px; color:var(--glow-blue);"></i>Aiyaan Lifestyle</div>
           </div>
           <div class="fact">
             <div class="label">Studying</div>
-            <div class="value"><i class="fas fa-graduation-cap"></i>MSS · Univ. of Dhaka</div>
+            <div class="value"><i class="fas fa-graduation-cap" style="margin-right:8px; color:var(--glow-blue);"></i>MSS · Univ. of Dhaka</div>
           </div>
           <div class="fact">
             <div class="label">Focus</div>
-            <div class="value"><i class="fas fa-wand-magic-sparkles"></i>AI-Assisted Design</div>
+            <div class="value"><i class="fas fa-wand-magic-sparkles" style="margin-right:8px; color:var(--glow-blue);"></i>AI-Assisted Design</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">02</span>
-      <span>Toolkit</span>
-    </div>
-    <div class="skills-header">
-      <h2 class="skills-heading reveal">
-        Tools that <em>shape</em> the<br>idea into form.
-      </h2>
-      <p class="skills-intro reveal">
-        A hybrid stack of traditional design software, motion graphics, and AI-assisted creative engines.
-      </p>
-    </div>
-
-    <div class="skill-group reveal">
-      <div class="skill-group-title">Design & Motion Tools</div>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 02 · Toolkit</div>
+        <h2 class="section-title">Tools that <em>shape</em> the<br>idea into form.</h2>
+      </div>
       <div class="skills-grid">
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-layer-group"></i></div>
           <div class="name">Adobe Photoshop</div>
-          <div class="category">Raster · Compositing</div>
+          <div class="cat">Raster · Compositing</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-pen-nib"></i></div>
           <div class="name">Adobe Illustrator</div>
-          <div class="category">Vector · Branding</div>
+          <div class="cat">Vector · Branding</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-film"></i></div>
           <div class="name">After Effects</div>
-          <div class="category">Motion · VFX</div>
+          <div class="cat">Motion · VFX</div>
         </div>
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-video"></i></div>
           <div class="name">CapCut</div>
-          <div class="category">Editing · Social</div>
+          <div class="cat">Editing · Social</div>
         </div>
-      </div>
-    </div>
-
-    <div class="skill-group reveal">
-      <div class="skill-group-title">AI-Powered Workflow</div>
-      <div class="skills-grid">
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-comments"></i></div>
           <div class="name">ChatGPT</div>
-          <div class="category">Copy · Ideation</div>
+          <div class="cat">Copy · Ideation</div>
         </div>
-        <div class="skill-card">
-          <div class="icon"><i class="fas fa-diagram-project"></i></div>
-          <div class="name">Google Flow</div>
-          <div class="category">AI Video</div>
-        </div>
-        <div class="skill-card">
+        <div class="skill-card glass-card reveal">
           <div class="icon"><i class="fas fa-image"></i></div>
           <div class="name">Midjourney</div>
-          <div class="category">Generative Art</div>
-        </div>
-        <div class="skill-card">
-          <div class="icon"><i class="fas fa-palette"></i></div>
-          <div class="name">Freepik</div>
-          <div class="category">Assets · Templates</div>
+          <div class="cat">Generative Art</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">03</span>
-      <span>Experience</span>
-    </div>
-    <div class="exp-header">
-      <h2 class="exp-heading reveal">
-        A trajectory through <em>creative</em> space.
-      </h2>
-    </div>
-
-    <div class="timeline">
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Present <span class="now">NOW</span></div>
-        <div class="timeline-content">
-          <div class="timeline-role">Content Developer</div>
-          <div class="timeline-company"><i class="fas fa-circle"></i>Lust Manager.com · Remote</div>
-          <div class="timeline-desc">
-            <ul>
-              <li>Developing engaging digital content and creative strategies for Lust Manager.com.</li>
-              <li>Producing AI-assisted media, graphics, and marketing materials to drive platform growth.</li>
-              <li>Collaborating with cross-functional teams to deliver scroll-stopping narratives and visuals.</li>
-            </ul>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 03 · Experience</div>
+        <h2 class="section-title">A trajectory through <em>creative</em> space.</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Present <span style="background:#4ade80; color:#000; padding:2px 6px; border-radius:4px; font-size:10px;">NOW</span></div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Content Developer</div>
+            <div class="timeline-company">lustmanager.com · Remote</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Developing engaging digital content and creative strategies.</li>
+                <li>Producing AI-assisted media, graphics, and marketing materials.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Aug '24 — Jun '26</div>
-        <div class="timeline-content">
-          <div class="timeline-role">Graphics Designer</div>
-          <div class="timeline-company"><i class="fas fa-circle"></i>Wafilife - E-commerce Platform · Dhaka</div>
-          <div class="timeline-desc">
-            <ul>
-              <li>Designed promotional banners, product visuals, and campaign creatives for a high-traffic Bangladeshi e-commerce platform.</li>
-              <li>Produced AI-assisted video content and motion graphics for social media and product promotions.</li>
-            </ul>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Aug '24 — Jun '26</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Graphics Designer</div>
+            <div class="timeline-company">Wafilife - E-commerce Platform · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Designed promotional banners, product visuals, and campaign creatives.</li>
+                <li>Produced AI-assisted video content and motion graphics for social media.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Jan '21 — Jan '24</div>
-        <div class="timeline-content">
-          <div class="timeline-role">Creative Director & Founder</div>
-          <div class="timeline-company"><i class="fas fa-circle"></i>Aiyaan — Gifts, Stationery & Home Decor · Dhaka</div>
-          <div class="timeline-desc">
-            <ul>
-              <li>Founded and led a premium lifestyle brand, independently managing all creative direction, visual branding, and social media marketing.</li>
-              <li>Designed product packaging, promotional content, and social media campaigns that built an engaged customer community.</li>
-            </ul>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Jan '21 — Jan '24</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Creative Director & Founder</div>
+            <div class="timeline-company">Aiyaan — Gifts, Stationery & Home Decor · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Founded and led a premium lifestyle brand, independently managing all creative direction.</li>
+                <li>Designed product packaging and social media campaigns.</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="timeline-item reveal">
-        <div class="timeline-date">Jan '20 — Jan '22</div>
-        <div class="timeline-content">
-          <div class="timeline-role">Junior Graphics Designer</div>
-          <div class="timeline-company"><i class="fas fa-circle"></i>Connecting Disorder · Youth Voluntary Org · Dhaka</div>
-          <div class="timeline-desc">
-            <ul>
-              <li>Designed awareness posters, digital graphics, and event materials for a youth-led voluntary organization supporting individuals with autism and communication disorders.</li>
-            </ul>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Jan '20 — Jan '22</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Junior Graphics Designer</div>
+            <div class="timeline-company">Connecting Disorder · Youth Voluntary Org · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Designed awareness posters, digital graphics, and event materials for a youth-led voluntary organization supporting individuals with autism and communication disorders.</li>
+                <li>Contributed to campaigns that increased community reach and social media engagement.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- GALLERY / PORTFOLIO -->
   <section id="gallery">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">04</span>
-      <span>Visual Gallery</span>
-    </div>
-    <div class="gallery-header">
-      <h2 class="gallery-heading reveal">
-        Selected <em>visuals</em> from<br>the portfolio.
-      </h2>
-    </div>
-
-    <div class="gallery-grid">
-      <a href="https://www.behance.net/gallery/242981181/Creative-Book-Promotion-Social-Media-Advertising" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling Banner">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 04 · Visual Gallery</div>
+        <h2 class="section-title">Selected <em>visuals</em> from<br>the portfolio.</h2>
+      </div>
+      <div class="gallery-grid">
+        <a href="https://www.behance.net/gallery/242981181/Creative-Book-Promotion-Social-Media-Advertising" target="_blank" class="gallery-item reveal">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling">
           <div class="gallery-overlay">
             <div class="gallery-cat">Social Media · Banner</div>
             <div class="gallery-title">Book Storytelling Campaign</div>
           </div>
-        </div>
-      </a>
-
-      <a href="https://www.behance.net/gallery/245717705/Polo-Shirt-Social-Media-Campaign-for-Libasul-Haya" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
+        </a>
+        <a href="https://www.behance.net/gallery/245717705/Polo-Shirt-Social-Media-Campaign-for-Libasul-Haya" target="_blank" class="gallery-item reveal">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8b8e49245717705.69b36d09093f5.png" alt="Libasul Haya">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
           <div class="gallery-overlay">
             <div class="gallery-cat">Fashion · E-commerce</div>
             <div class="gallery-title">Libasul Haya Polo Campaign</div>
           </div>
-        </div>
-      </a>
-
-      <a href="https://www.behance.net/gallery/252287223/Wallframes-Social-Media-Design-Spiritual-Minimalism" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Product Visuals">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+        </a>
+        <a href="https://www.behance.net/gallery/252287223/Wallframes-Social-Media-Design-Spiritual-Minimalism" target="_blank" class="gallery-item reveal">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Visuals">
           <div class="gallery-overlay">
             <div class="gallery-cat">Branding · Packaging</div>
             <div class="gallery-title">Aiyaan Product Visuals</div>
           </div>
-        </div>
-      </a>
-
-      <a href="https://www.behance.net/gallery/249976821/Brooks-Glycerin-Max-2-Concept-Campaign" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e5538d249976821.6a143ca0b0657.png" alt="AI-Assisted Creative">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
-          <div class="gallery-overlay">
-            <div class="gallery-cat">AI · Generative</div>
-            <div class="gallery-title">AI-Assisted Creative</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="https://www.behance.net/gallery/199473481/Social-Media-Day-Banner-Connecting-Disorders" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
+        </a>
+        <a href="https://www.behance.net/gallery/199473481/Social-Media-Day-Banner-Connecting-Disorders" target="_blank" class="gallery-item reveal">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/26b1a8199473481.665223017f9f6.jpg" alt="Connecting Disorder Posters">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
           <div class="gallery-overlay">
             <div class="gallery-cat">Digital · Awareness</div>
             <div class="gallery-title">Connecting Disorder Posters</div>
           </div>
-        </div>
-      </a>
-
-      <a href="https://www.behance.net/" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/00c506252580593.6a53689859e12.jpg" alt="Promotional Video Stills">
-          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
-          <div class="gallery-overlay">
-            <div class="gallery-cat">Video · Motion</div>
-            <div class="gallery-title">Promotional Video Stills</div>
-          </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- MOTION & STORYTELLING -->
   <section id="motion">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">05</span>
-      <span>Motion & Storytelling</span>
-    </div>
-    <div class="gallery-header">
-      <h2 class="gallery-heading reveal">
-        Visuals in <em>motion</em><br>and stories.
-      </h2>
-      <p class="about-bio reveal" style="max-width: 800px; margin-top: 20px;">
-        A collection of motion graphics, promotional videos, and storytelling visual history designed for <strong>Wafilife</strong> and other creative campaigns.
-      </p>
-    </div>
-
-    <div class="motion-grid">
-      <div class="video-card reveal">
-        <iframe src="https://www.youtube.com/embed/_LYxnJ2IvoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 05 · Motion & Storytelling</div>
+        <h2 class="section-title">Visuals in <em>motion</em><br>and stories.</h2>
+        <p class="section-desc">A collection of motion graphics, promotional videos, and storytelling visual history designed for Wafilife and other creative campaigns.</p>
       </div>
-      <div class="video-card reveal">
-        <iframe src="https://www.youtube.com/embed/5GnEbNhKqW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="video-card reveal">
-        <iframe src="https://www.youtube.com/embed/wyFkxbF5IBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="motion-grid">
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/_LYxnJ2IvoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/5GnEbNhKqW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/wyFkxbF5IBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       </div>
     </div>
   </section>
 
-  <!-- BRAND IDENTITY (Gallery Format) -->
   <section id="brand">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">06</span>
-      <span>Brand Identity</span>
-    </div>
-    <div class="gallery-header">
-      <h2 class="gallery-heading reveal">
-        Crafting <em>identities</em><br>from scratch.
-      </h2>
-      <p class="about-bio reveal" style="max-width: 800px; margin-top: 20px;">
-        Logo design and comprehensive brand identity systems built to resonate with target audiences and maintain visual consistency.
-      </p>
-    </div>
-
-    <div class="brand-grid">
-      <!-- Frizo -->
-      <a href="https://www.facebook.com/frizobd" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <!-- Replace src with Frizo Logo Image -->
-          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FSUWIw8epmAUeWyiBW_6qtSV3Mh6_7U7SITWwR6veU3Z2DSjuafAijP8nJLr7m5FOUG1br4BfxZbuK9hQ80it7AFJBI-0vrUTvDSIqLkm42U-vJwPYZGUOx3XfpI1uro3r3OFWn-g2TGezY9lGguWo9TvohVY4eI_07P1PoGmMtMs9eQzWKPxtO6QCk0hOvYbgSPkO92iNeaxiYhTc-_ou27lC0Oipmu4f2itZB07QGVqxgf_xJPsorXMnjD3vLDjfkhIUc7sVkvSBtEOSq4GBYwPi6VS_OjMR1LziQSPNHQLRkGRNw4P2_7wymbTBOIi3KDid7cX97EIcaPWtF7RVu09LiqJi9FMw4gAFQXJPuFRZtamvKiKIaAI25QtuWEk_jAOwPfzFpi2ct45EpqYAckO3M1yQu_8p-UsWN7Gl_mIodCLRMi61HA1hDjwyH_zR-6bg4xZPAZF8SghE4oLj7e3Zey-9lrj2H0iVBKRWf_IF-H0bOl83qzeRXWszhRvQvbZqyMqsyBKieBf97mQ7Yo8xuBD0OrZ2ZEDPNwsBXHMDTSRqYpyINmwif6VBXAp8_8xLA5yikA4YNaZFRVZQQ5MmbkZK3-h7l192QSyY3dFi3wij-qr8CfdXne-U3OzKTmOW63R0DUd7EnQpMX3KL4YMXQl1xJ7QTvu0u6N66BBg1f27gYynPfxac0kYDvOpO0VWugUdytuYxIYQrQvCLlVZWm0siUQYUUbmBxp_HGKMT1LkW9MMeBxdOO1MORxqzBUwXHUWAX25ywpR2ExtUfWi9bx6kSH9RzjBY1l5iOsnHnr2JxKUviDzOF2sDil6jI8X7JBlKQntoEgVZ_1EXSRaPepY4qXPcc5nb8P5jWE-ZPDi3F8vR6BgF8s4x9WCTPC3g9U7l2bRFd87zT7udNxENv1JpY06pObrZN4Ff-R6Ny6t9ZZDr_VJRHAPUiEBVZsfIWN2kAQ5zxfxUgW2Ja6ilWMKY8-UZylyEJgDpzt_Di77YPCUdzZ0y7k1UAq-VpEpAeG1KEbADpiU8hs9hYv-ooFBY2eMbb0SI4uv57mltJKz6XNBZwN_lFXB10TkPT0eFT1tJWgRTnyTqgv0iG7GRbCM9oIJVrxSPkxHH1Oh_21rUQ1Mh3X8sdoOVS0=w1920-h911?auditContext=prefetch">
-          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 06 · Brand Identity</div>
+        <h2 class="section-title">Crafting <em>identities</em><br>from scratch.</h2>
+      </div>
+      <div class="gallery-grid">
+        <a href="https://www.facebook.com/frizobd" target="_blank" class="gallery-item reveal">
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FSUWIw8epmAUeWyiBW_6qtSV3Mh6_7U7SITWwR6veU3Z2DSjuafAijP8nJLr7m5FOUG1br4BfxZbuK9hQ80it7AFJBI-0vrUTvDSIqLkm42U-vJwPYZGUOx3XfpI1uro3r3OFWn-g2TGezY9lGguWo9TvohVY4eI_07P1PoGmMtMs9eQzWKPxtO6QCk0hOvYbgSPkO92iNeaxiYhTc-_ou27lC0Oipmu4f2itZB07QGVqxgf_xJPsorXMnjD3vLDjfkhIUc7sVkvSBtEOSq4GBYwPi6VS_OjMR1LziQSPNHQLRkGRNw4P2_7wymbTBOIi3KDid7cX97EIcaPWtF7RVu09LiqJi9FMw4gAFQXJPuFRZtamvKiKIaAI25QtuWEk_jAOwPfzFpi2ct45EpqYAckO3M1yQu_8p-UsWN7Gl_mIodCLRMi61HA1hDjwyH_zR-6bg4xZPAZF8SghE4oLj7e3Zey-9lrj2H0iVBKRWf_IF-H0bOl83qzeRXWszhRvQvbZqyMqsyBKieBf97mQ7Yo8xuBD0OrZ2ZEDPNwsBXHMDTSRqYpyINmwif6VBXAp8_8xLA5yikA4YNaZFRVZQQ5MmbkZK3-h7l192QSyY3dFi3wij-qr8CfdXne-U3OzKTmOW63R0DUd7EnQpMX3KL4YMXQl1xJ7QTvu0u6N66BBg1f27gYynPfxac0kYDvOpO0VWugUdytuYxIYQrQvCLlVZWm0siUQYUUbmBxp_HGKMT1LkW9MMeBxdOO1MORxqzBUwXHUWAX25ywpR2ExtUfWi9bx6kSH9RzjBY1l5iOsnHnr2JxKUviDzOF2sDil6jI8X7JBlKQntoEgVZ_1EXSRaPepY4qXPcc5nb8P5jWE-ZPDi3F8vR6BgF8s4x9WCTPC3g9U7l2bRFd87zT7udNxENv1JpY06pObrZN4Ff-R6Ny6t9ZZDr_VJRHAPUiEBVZsfIWN2kAQ5zxfxUgW2Ja6ilWMKY8-UZylyEJgDpzt_Di77YPCUdzZ0y7k1UAq-VpEpAeG1KEbADpiU8hs9hYv-ooFBY2eMbb0SI4uv57mltJKz6XNBZwN_lFXB10TkPT0eFT1tJWgRTnyTqgv0iG7GRbCM9oIJVrxSPkxHH1Oh_21rUQ1Mh3X8sdoOVS0=w1920-h911" alt="Frizo">
           <div class="gallery-overlay">
             <div class="gallery-cat">Branding · Logo Design</div>
             <div class="gallery-title">Frizo</div>
-            <div class="gallery-desc">A modern and refreshing brand identity designed for Frizo, focusing on clean typography and a vibrant palette.</div>
+            <div class="gallery-desc">A modern and refreshing brand identity focusing on clean typography and a vibrant palette.</div>
           </div>
-        </div>
-      </a>
-
-      <!-- Ecommetrix -->
-      <a href="https://www.facebook.com/ecommetrix/" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <!-- Replace src with Ecommetrix Logo Image -->
-          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FlHf1dnr8abNVIH5hwJsX2YK21iEUfy2TvdKhLf7vpCf1Lr382YUzD32RZthgPubuDXkL410R5JQTQcuabqHcg6AS8hbxzBbBHAScLMPxduXOCzyCm7TWSYT5vPp_oIF1uUWaOy-Un-CHSUyFdHOaP1rmDmGISTI4ErvZfK0vtGdngZWSCkwQsvKRLT2eeYMP3YLJIUTNXdEQBH8kvxA6kpy8wFLocuvbgqMTZ49jei-R_mu-iE5Htr4SjQanpq8uC8RqWAr3EVC877-58CpA2jTeygflI77OSrGw942bOsft1TUajhkD8Esf4a_xvRkWk-YHyVO6xnqvbPyuV26VaM1UU_EHln4xSxHJy2TGCY0ozPwrgbmadBtMGK1zIZUkxE2VNZrf19ydiDi3a4Q3Iz5UZwmjPxqTgdYITBC4MjsWcR9Ajb1w7k6msgQ7LbeRmKj4c_cTodpx2qalJBFFODN4GDERuLsCD6TN9MSdymv45w80AbZuAZL9XDXf2ib1SXbsh09k4JrHHtkUe23wE5-zCgRnoqcKpTdMcXitUskHpGsUUJ6UXjo8Af67uIEJ9fpBzUhOh1MfR9S94MGROHbGKhvBLVNdnE3Xd5ZF7fg9B4SxNdKx-bCPLZ5uqYZzpiOYjJwOEcUNnCpKduqKmSNr14lBjo_GEFycUjtBuPSS4y8USxMFmT_l3HrLA_mcHp02XS58iKybsnoB9E5ea_Vq8xkgXfn7slkh2CjxwisBoKecKpBQJXaXS083xQNms4w35ug1OTnaupjiFSiZtfh9OF5KnIwj_jyIayU5CZeop4fUKajDItVLAVPTwKrHD5z9ZOt2tkDAJy5SBFcXl2Tf29qq9nZfkI2ewRjz8q7a8cgayI2QPHJkyDTS1Bbw075cv1BfRhai-Ve2oIK6ENc_RB3KaQUnVogeEYFkgYL6lXfO-yD5DJje9Xtg7wYnj_DQdf39uqcXDDtM-Dit9L31jK-flpqWk1DU1pJK7_A9HEeptv6ln9wzbmJP380lasmwp4f7wsQ-u5S4FvtErp3sQNmKuBiyIY5nFKRnyGL3G68-qCbE1o1m0Y9tQKVnweUmQenSci8h6szvZCedXb1hfoUhimlfleSEHhuEOrw_Vfca1Eseuwaw7efo_DMQ=w1920-h911?auditContext=prefetch">
-          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+        </a>
+        <a href="https://www.facebook.com/ecommetrix/" target="_blank" class="gallery-item reveal">
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_FlHf1dnr8abNVIH5hwJsX2YK21iEUfy2TvdKhLf7vpCf1Lr382YUzD32RZthgPubuDXkL410R5JQTQcuabqHcg6AS8hbxzBbBHAScLMPxduXOCzyCm7TWSYT5vPp_oIF1uUWaOy-Un-CHSUyFdHOaP1rmDmGISTI4ErvZfK0vtGdngZWSCkwQsvKRLT2eeYMP3YLJIUTNXdEQBH8kvxA6kpy8wFLocuvbgqMTZ49jei-R_mu-iE5Htr4SjQanpq8uC8RqWAr3EVC877-58CpA2jTeygflI77OSrGw942bOsft1TUajhkD8Esf4a_xvRkWk-YHyVO6xnqvbPyuV26VaM1UU_EHln4xSxHJy2TGCY0ozPwrgbmadBtMGK1zIZUkxE2VNZrf19ydiDi3a4Q3Iz5UZwmjPxqTgdYITBC4MjsWcR9Ajb1w7k6msgQ7LbeRmKj4c_cTodpx2qalJBFFODN4GDERuLsCD6TN9MSdymv45w80AbZuAZL9XDXf2ib1SXbsh09k4JrHHtkUe23wE5-zCgRnoqcKpTdMcXitUskHpGsUUJ6UXjo8Af67uIEJ9fpBzUhOh1MfR9S94MGROHbGKhvBLVNdnE3Xd5ZF7fg9B4SxNdKx-bCPLZ5uqYZzpiOYjJwOEcUNnCpKduqKmSNr14lBjo_GEFycUjtBuPSS4y8USxMFmT_l3HrLA_mcHp02XS58iKybsnoB9E5ea_Vq8xkgXfn7slkh2CjxwisBoKecKpBQJXaXS083xQNms4w35ug1OTnaupjiFSiZtfh9OF5KnIwj_jyIayU5CZeop4fUKajDItVLAVPTwKrHD5z9ZOt2tkDAJy5SBFcXl2Tf29qq9nZfkI2ewRjz8q7a8cgayI2QPHJkyDTS1Bbw075cv1BfRhai-Ve2oIK6ENc_RB3KaQUnVogeEYFkgYL6lXfO-yD5DJje9Xtg7wYnj_DQdf39uqcXDDtM-Dit9L31jK-flpqWk1DU1pJK7_A9HEeptv6ln9wzbmJP380lasmwp4f7wsQ-u5S4FvtErp3sQNmKuBiyIY5nFKRnyGL3G68-qCbE1o1m0Y9tQKVnweUmQenSci8h6szvZCedXb1hfoUhimlfleSEHhuEOrw_Vfca1Eseuwaw7efo_DMQ=w1920-h911" alt="Ecommetrix">
           <div class="gallery-overlay">
             <div class="gallery-cat">Corporate · Visual Identity</div>
             <div class="gallery-title">Ecommetrix</div>
-            <div class="gallery-desc">Complete visual identity for Ecommetrix, an e-commerce solutions provider, featuring a sleek and corporate logo design.</div>
+            <div class="gallery-desc">Complete visual identity for an e-commerce solutions provider, featuring a sleek and corporate logo design.</div>
           </div>
-        </div>
-      </a>
-
-      <!-- 5menstudio -->
-      <a href="https://www.facebook.com/fivemenstudiobd" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <!-- Replace src with 5menstudio Logo Image -->
-          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_G0D2l9MKR2Bn6OllwNpReYv0kwzuZsts95azDhpWQhweS3P8FNFOVJke_5qnbrciblvfSMWusJH9ZLBXYbnFaXevNarj092fz_F67k4eteGj9nV8DhHaYwzcdxh6k14zAf2Chwl1Vda1gW-1KMYyyT-gYIQqO5Vg7MnJGjmz_qsAtyhedduCzBBOu8ArPiy_eR2e_z-fl_GybmZkQgdmJqsDTdDp1TarVdjOLGZBjpsnGI89SQaTEew05q_vflPtc60-ase97QKGKN_b2PVZU5Pz9AIEWVeXwUs4a7Cw8UthXdqbEh3UqxPPiCaT5s7DQcvto4TbOwcWs-dDB_R2e6ot1XFjb8dY_pu9Tr2fiXJQQeEl7Y3j8tpuUn4NyzEljY9v4T3OizeV8xQLJowFdLqbCeRNNc3rxt-nz6wiNkwbGyNYGZAEQsQ8oZ_BH_QBVX7CHFNx_kbBpQNG2zlHN6TINIpmDDBGiwKrvlpvqKC-LVp3zqHhy_-9ZoE6ahKkgxbSXw8v3fJOnfgPboyFngKb-XoVAM8i5kPyJKcWaTe2qkXOKY_6qRGCH0U90G-8QvbPmhjcefpip7QQLHyE_HqLucTlFXL6SPjBVL6mUaRiz-dkUVoo7G5i7T4gyMhPCPFCvULvDTbvPkUSorzjBamy28xASA4f5JU8_s8HBHEptffCrHRNYTx-DI6sgz7-QSVwUhmmT5JcHyHk72RmpmkFuYNFCEzENzzM-D1c4ODuJ5qZnwnwsDyKvVOBGJxXmtd0b8tzp1zxZzUMUVHuLcEZflRJksT7RF1UhXgO1w8DGVY3aJ1_uR9Kxci04ao7ZAyKRi_j6z7U4BfLhyNrhV8uUF_4grv62xVlxU8kXmEbzHstKmZYx0n3GoX9BrQVcgvK8xYonujnxSfk4ouRPx122fYn0eBavR6iA492sjoTFbD8SP20GXZUnj5JYFzLRu16iFVedZkr6yvlPMmCFHG1xVLJLLVeaahMDMQ1PBp7E8mt8BgYPznfIiTMUbRK_1GaRg4INLVpNeT9gCHMv2z6e_V5D11dMKNAZcHKBgv6sjRgeQrYTX5FcQysIs0CjdApMcpSDU0g5cys1AtqT_sBfGR-tmCkm2RmRlxNegQRhkboFYX-uxVTUbGpJENYA=w1920-h911?auditContext=prefetch">
-          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+        </a>
+        <a href="https://www.facebook.com/fivemenstudiobd" target="_blank" class="gallery-item reveal">
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_G0D2l9MKR2Bn6OllwNpReYv0kwzuZsts95azDhpWQhweS3P8FNFOVJke_5qnbrciblvfSMWusJH9ZLBXYbnFaXevNarj092fz_F67k4eteGj9nV8DhHaYwzcdxh6k14zAf2Chwl1Vda1gW-1KMYyyT-gYIQqO5Vg7MnJGjmz_qsAtyhedduCzBBOu8ArPiy_eR2e_z-fl_GybmZkQgdmJqsDTdDp1TarVdjOLGZBjpsnGI89SQaTEew05q_vflPtc60-ase97QKGKN_b2PVZU5Pz9AIEWVeXwUs4a7Cw8UthXdqbEh3UqxPPiCaT5s7DQcvto4TbOwcWs-dDB_R2e6ot1XFjb8dY_pu9Tr2fiXJQQeEl7Y3j8tpuUn4NyzEljY9v4T3OizeV8xQLJowFdLqbCeRNNc3rxt-nz6wiNkwbGyNYGZAEQsQ8oZ_BH_QBVX7CHFNx_kbBpQNG2zlHN6TINIpmDDBGiwKrvlpvqKC-LVp3zqHhy_-9ZoE6ahKkgxbSXw8v3fJOnfgPboyFngKb-XoVAM8i5kPyJKcWaTe2qkXOKY_6qRGCH0U90G-8QvbPmhjcefpip7QQLHyE_HqLucTlFXL6SPjBVL6mUaRiz-dkUVoo7G5i7T4gyMhPCPFCvULvDTbvPkUSorzjBamy28xASA4f5JU8_s8HBHEptffCrHRNYTx-DI6sgz7-QSVwUhmmT5JcHyHk72RmpmkFuYNFCEzENzzM-D1c4ODuJ5qZnwnwsDyKvVOBGJxXmtd0b8tzp1zxZzUMUVHuLcEZflRJksT7RF1UhXgO1w8DGVY3aJ1_uR9Kxci04ao7ZAyKRi_j6z7U4BfLhyNrhV8uUF_4grv62xVlxU8kXmEbzHstKmZYx0n3GoX9BrQVcgvK8xYonujnxSfk4ouRPx122fYn0eBavR6iA492sjoTFbD8SP20GXZUnj5JYFzLRu16iFVedZkr6yvlPMmCFHG1xVLJLLVeaahMDMQ1PBp7E8mt8BgYPznfIiTMUbRK_1GaRg4INLVpNeT9gCHMv2z6e_V5D11dMKNAZcHKBgv6sjRgeQrYTX5FcQysIs0CjdApMcpSDU0g5cys1AtqT_sBfGR-tmCkm2RmRlxNegQRhkboFYX-uxVTUbGpJENYA=w1920-h911" alt="5menstudio">
           <div class="gallery-overlay">
             <div class="gallery-cat">Creative · Studio Branding</div>
             <div class="gallery-title">5menstudio</div>
-            <div class="gallery-desc">Creative logo and brand identity for 5menstudio, a dynamic production house, emphasizing a minimalist and bold aesthetic.</div>
+            <div class="gallery-desc">Creative logo and brand identity for a dynamic production house, emphasizing a minimalist and bold aesthetic.</div>
           </div>
-        </div>
-      </a>
-
-      <!-- Aiyaan -->
-      <a href="https://www.facebook.com/shopaiyaan" target="_blank" class="gallery-link reveal">
-        <div class="gallery-item">
-          <!-- Replace src with Aiyaan Logo Image -->
-          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_HN4N17y-AW7K-14CYQoeBh1H6_r3pupee6cRGXxPYiWNyjtaBX4EJJg20YA0vvrqCiCn1S-0bFwpZYPIRqrENHBjddfb9c6gIPYbuxRf0PDyEDhHAw8hLHefMXzDS-C_TBIQurASAboIrgTLTJXlgtj0nRaFvfqoz1-xOY45Bp6jSqPfgB5RXqGAoo_xocaaamA6jdmCnYs0Sq_WrNuokvIwdPf9p2A3GRS6LYjtRQ-QDSDNZ8vcyKtu4NOD37I7dlFbG6BjJ1dVMkYnAUal6A5PuUXgiOLvJmO9IpVkm2XpnRfYEcm738aga0IW9gHzoV4hQT6RHhHHKn3D4Llhn1n1HJmaOy68tE13eBlvmXfDVA6pP7lzlmoT1SAIpt3Fimd9HzNo3PnrSKoTj8zASWHgGMBYzkDwNObb77WZTzEP0zGxrx13p6WPxInfaHcH7StPMEb-oW33wXp9Zbu6kcbdYAxP0WEJYlqL-9p1AU1ZQG1bK8QBeM8OZ0d6HORffh0l1l6lnaamhb8Av0koF0Bbno1POy_8Sd6gd50EfL95DuWl7DNLLbuZWp6rl5srmRYoUoZ5pYY_pM_TuJbJ-H3IldKPT-vhL73cn4Rzy09O_tRoPiE3LTxKOJpfLI5UUL5arBCwLsgiWi5Ml__1lv90LWNoCjR7tN0af2wwH21MqtG7j_EWz8YcaCT-ARKUpK8d7k1-o5s75kJkIBDn9Qd3z4WyC_OK-OjmnfgV0-4YCSpqlb0wwEJzaUxIfffn_laFjwzUVVdIX9vlddJHUOgrmuVF5rTrspSA2fvjxkccWbVtVkh25IcDZjlEjWmu0ddTyEV00oIDzdjHJT86PW5Lv055fhXbOhk0OKtiP_epTQmLr6H1o_5TWzrInJK7ONBF4Jdtto9jlXgJ3A-FeAz4lLHl_LKtdFD2pL585dxTi4gTSyZ1dqvM1rVgpew2D1ZcjgVEh5iovTXq2eSzeh-E8H6O5MNxfiEHKjMsnqR_0y2qoVy3IP23bX3De7P4YLRDiAmHWiSAWa4F5og9_MhYOyzhXEkvx1kbl6Qp7WBQoDe545w3_xlZjlSEaPFY4QBVvgi7My-faxbQlpF50cFjXHreX3R_QKi8pyrSHNhx7uao72VWrjik-_kzCeBKE=w1920-h911?auditContext=prefetch">
-          <div class="gallery-external-icon"><i class="fab fa-facebook-f"></i></div>
+        </a>
+        <a href="https://www.facebook.com/shopaiyaan" target="_blank" class="gallery-item reveal">
+          <img src="https://lh3.googleusercontent.com/rd-d/ALs6j_HN4N17y-AW7K-14CYQoeBh1H6_r3pupee6cRGXxPYiWNyjtaBX4EJJg20YA0vvrqCiCn1S-0bFwpZYPIRqrENHBjddfb9c6gIPYbuxRf0PDyEDhHAw8hLHefMXzDS-C_TBIQurASAboIrgTLTJXlgtj0nRaFvfqoz1-xOY45Bp6jSqPfgB5RXqGAoo_xocaaamA6jdmCnYs0Sq_WrNuokvIwdPf9p2A3GRS6LYjtRQ-QDSDNZ8vcyKtu4NOD37I7dlFbG6BjJ1dVMkYnAUal6A5PuUXgiOLvJmO9IpVkm2XpnRfYEcm738aga0IW9gHzoV4hQT6RHhHHKn3D4Llhn1n1HJmaOy68tE13eBlvmXfDVA6pP7lzlmoT1SAIpt3Fimd9HzNo3PnrSKoTj8zASWHgGMBYzkDwNObb77WZTzEP0zGxrx13p6WPxInfaHcH7StPMEb-oW33wXp9Zbu6kcbdYAxP0WEJYlqL-9p1AU1ZQG1bK8QBeM8OZ0d6HORffh0l1l6lnaamhb8Av0koF0Bbno1POy_8Sd6gd50EfL95DuWl7DNLLbuZWp6rl5srmRYoUoZ5pYY_pM_TuJbJ-H3IldKPT-vhL73cn4Rzy09O_tRoPiE3LTxKOJpfLI5UUL5arBCwLsgiWi5Ml__1lv90LWNoCjR7tN0af2wwH21MqtG7j_EWz8YcaCT-ARKUpK8d7k1-o5s75kJkIBDn9Qd3z4WyC_OK-OjmnfgV0-4YCSpqlb0wwEJzaUxIfffn_laFjwzUVVdIX9vlddJHUOgrmuVF5rTrspSA2fvjxkccWbVtVkh25IcDZjlEjWmu0ddTyEV00oIDzdjHJT86PW5Lv055fhXbOhk0OKtiP_epTQmLr6H1o_5TWzrInJK7ONBF4Jdtto9jlXgJ3A-FeAz4lLHl_LKtdFD2pL585dxTi4gTSyZ1dqvM1rVgpew2D1ZcjgVEh5iovTXq2eSzeh-E8H6O5MNxfiEHKjMsnqR_0y2qoVy3IP23bX3De7P4YLRDiAmHWiSAWa4F5og9_MhYOyzhXEkvx1kbl6Qp7WBQoDe545w3_xlZjlSEaPFY4QBVvgi7My-faxbQlpF50cFjXHreX3R_QKi8pyrSHNhx7uao72VWrjik-_kzCeBKE=w1920-h911" alt="Aiyaan">
           <div class="gallery-overlay">
             <div class="gallery-cat">Lifestyle · Packaging</div>
             <div class="gallery-title">Aiyaan</div>
-            <div class="gallery-desc">Complete brand identity design, including logo, color palette, typography, and packaging direction for a premium lifestyle brand.</div>
+            <div class="gallery-desc">Complete brand identity design, including logo, color palette, typography, and packaging direction.</div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
   <section id="education">
-    <div class="section-label reveal">
-      <span class="line"></span>
-      <span class="num">07</span>
-      <span>Education</span>
-    </div>
-    <div class="exp-header" style="margin-bottom: 50px;">
-      <h2 class="exp-heading reveal">
-        Foundations in <em>science</em>,<br>fluent in <em>design</em>.
-      </h2>
-    </div>
-
-    <div class="edu-grid">
-      <div class="edu-card reveal">
-        <div class="edu-period">Jan '25 — Jan '26 · Ongoing</div>
-        <div class="edu-degree">MSS in Communication Disorders</div>
-        <div class="edu-school"><i class="fas fa-university"></i>University of Dhaka</div>
-        <div class="edu-meta">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 07 · Education</div>
+        <h2 class="section-title">Foundations in <em>science</em>,<br>fluent in <em>design</em>.</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">Jan '25 — Jan '26 · Ongoing</div>
+          <div class="edu-degree">MSS in Communication Disorders</div>
+          <div class="edu-school">University of Dhaka</div>
           <span class="edu-pill">Master's</span>
         </div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-period">Jan '20 — Jan '24</div>
-        <div class="edu-degree">BSS in Communication Disorders</div>
-        <div class="edu-school"><i class="fas fa-university"></i>University of Dhaka</div>
-        <div class="edu-meta">
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">Jan '20 — Jan '24</div>
+          <div class="edu-degree">BSS in Communication Disorders</div>
+          <div class="edu-school">University of Dhaka</div>
           <span class="edu-pill">Bachelor's</span>
         </div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-period">2019 · Higher Secondary Certificate</div>
-        <div class="edu-degree">HSC — Science</div>
-        <div class="edu-school"><i class="fas fa-school"></i>Government Science College, Farmgate</div>
-        <div class="edu-meta">
-          <span class="edu-pill">Science Group</span>
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">2019 · Higher Secondary Certificate</div>
+          <div class="edu-degree">HSC — Science</div>
+          <div class="edu-school">Govt Science College, Farmgate</div>
           <span class="edu-pill gpa">GPA 5.00 / 5.00</span>
         </div>
-      </div>
-      <div class="edu-card reveal">
-        <div class="edu-period">2017 · Secondary School Certificate</div>
-        <div class="edu-degree">SSC — Science</div>
-        <div class="edu-school"><i class="fas fa-school"></i>Government Science School, Farmgate</div>
-        <div class="edu-meta">
-          <span class="edu-pill">Science Group</span>
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">2017 · Secondary School Certificate</div>
+          <div class="edu-degree">SSC — Science</div>
+          <div class="edu-school">Govt Science School, Farmgate</div>
           <span class="edu-pill gpa">GPA 5.00 / 5.00</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
-    <div class="contact-wrap">
-      <div class="section-label reveal">
-        <span class="line"></span>
-        <span class="num">08</span>
-        <span>Contact</span>
-      </div>
-      <h2 class="contact-heading reveal">
-        Let's create<br><em>something</em><br>worth the orbit.
-      </h2>
-
-      <div class="contact-grid">
-        <div class="contact-info reveal">
-          <a href="mailto:sdfahim4200@gmail.com" class="contact-link">
-            <div class="icon"><i class="fas fa-envelope"></i></div>
-            <div>
-              <div class="label">Email</div>
-              <div class="value">sdfahim4200@gmail.com</div>
-            </div>
-            <i class="fas fa-arrow-right arrow"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="contact-link">
-            <div class="icon"><i class="fab fa-linkedin-in"></i></div>
-            <div>
-              <div class="label">LinkedIn</div>
-              <div class="value">linkedin.com/in/syeedfahim</div>
-            </div>
-            <i class="fas fa-arrow-right arrow"></i>
-          </a>
-          <a href="tel:+8801831141481" class="contact-link">
-            <div class="icon"><i class="fas fa-phone"></i></div>
-            <div>
-              <div class="label">Phone</div>
-              <div class="value">+880 1831 141481</div>
-            </div>
-            <i class="fas fa-arrow-right arrow"></i>
-          </a>
-          <a href="#" class="contact-link">
-            <div class="icon"><i class="fas fa-location-dot"></i></div>
-            <div>
-              <div class="label">Location</div>
-              <div class="value">Tejgaon, Dhaka, Bangladesh</div>
-            </div>
-            <i class="fas fa-arrow-right arrow"></i>
-          </a>
+    <div class="container">
+      <div class="contact-wrap reveal">
+        <div class="section-label" style="justify-content: center;"><span class="line"></span> 08 · Contact</div>
+        <h2 class="section-title">Let's create something<br><em>worth the orbit.</em></h2>
+        <div class="contact-links">
+          <a href="mailto:sdfahim4200@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> sdfahim4200@gmail.com</a>
+          <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="contact-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+          <a href="tel:+8801831141481" class="contact-link"><i class="fas fa-phone"></i> +880 1831 141481</a>
         </div>
-
-        <form class="contact-form reveal" id="contactForm">
-          <div class="form-title">Start a conversation</div>
-          <div class="form-sub">Tell me about your project — I usually reply within 24 hours.</div>
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" name="name" placeholder="John Doe" required />
-          </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" name="email" placeholder="john@studio.com" required />
-          </div>
-          <div class="form-group">
-            <label>Project Brief</label>
-            <textarea name="message" placeholder="What are we creating together?" required></textarea>
-          </div>
-          <button type="submit" class="form-submit">
-            Send Message
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </form>
       </div>
     </div>
   </section>
@@ -1011,185 +590,13 @@
 </main>
 
 <footer>
-  <div class="footer-grid">
-    <div class="footer-copy">
-      © 2024 Syeed Hossain Fahim · Designed & coded in Dhaka, Bangladesh
-    </div>
-    <div class="footer-socials">
-      <a href="mailto:sdfahim4200@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="tel:+8801831141481" title="Phone"><i class="fas fa-phone"></i></a>
-      <a href="#hero" title="Back to top"><i class="fas fa-arrow-up"></i></a>
-    </div>
+  <div>© 2024 Syeed Hossain Fahim · Designed & coded in Dhaka</div>
+  <div class="footer-socials">
+    <a href="#hero">Back to Top <i class="fas fa-arrow-up"></i></a>
   </div>
 </footer>
 
-<div class="toast" id="toast"><i class="fas fa-check-circle"></i> Message sent — I'll be in touch soon.</div>
-
-<script type="module">
-  import * as THREE from 'three';
-
-  const canvas = document.getElementById('webgl');
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x000000, 0.025);
-
-  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
-  camera.position.set(0, 2, 20);
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setClearColor(0x000000, 1);
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.2));
-  const pointLight = new THREE.PointLight(0x4A6CF7, 2, 100);
-  pointLight.position.set(0, 0, -20);
-  scene.add(pointLight);
-
-  const coreGeo = new THREE.SphereGeometry(3, 32, 32);
-  const coreMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-  const core = new THREE.Mesh(coreGeo, coreMat);
-  core.position.set(0, 0, -30);
-  scene.add(core);
-
-  const glowGeo = new THREE.SphereGeometry(3.2, 32, 32);
-  const glowMat = new THREE.MeshBasicMaterial({ 
-    color: 0x4A6CF7, 
-    transparent: true, 
-    opacity: 0.2, 
-    side: THREE.BackSide 
-  });
-  const glow = new THREE.Mesh(glowGeo, glowMat);
-  glow.position.copy(core.position);
-  scene.add(glow);
-
-  const diskCount = 25000;
-  const diskGeo = new THREE.BufferGeometry();
-  const diskPositions = new Float32Array(diskCount * 3);
-  const diskColors = new Float32Array(diskCount * 3);
-
-  const colorWhite = new THREE.Color(0xffffff);
-  const colorGray = new THREE.Color(0x888888);
-  const colorBlue = new THREE.Color(0x00184F);
-  const colorGlow = new THREE.Color(0x4A6CF7);
-
-  for (let i = 0; i < diskCount; i++) {
-    const radius = 4 + Math.pow(Math.random(), 1.5) * 35;
-    const branchAngle = (i % 3) * (Math.PI * 2 / 3);
-    const spinAngle = radius * 0.15;
-    const angle = branchAngle + spinAngle;
-
-    const randomX = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * (radius * 0.04);
-    const randomY = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * (radius * 0.02);
-    const randomZ = Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1) * (radius * 0.04);
-
-    diskPositions[i * 3] = Math.cos(angle) * radius + randomX;
-    diskPositions[i * 3 + 1] = randomY;
-    diskPositions[i * 3 + 2] = Math.sin(angle) * radius + randomZ;
-
-    const mixedColor = colorWhite.clone();
-    mixedColor.lerp(colorGlow, Math.random() * 0.6);
-    mixedColor.lerp(colorGray, Math.random() * 0.3);
-    if (Math.random() > 0.7) mixedColor.lerp(colorBlue, 0.3);
-    
-    diskColors[i * 3] = mixedColor.r;
-    diskColors[i * 3 + 1] = mixedColor.g;
-    diskColors[i * 3 + 2] = mixedColor.b;
-  }
-
-  diskGeo.setAttribute('position', new THREE.BufferAttribute(diskPositions, 3));
-  diskGeo.setAttribute('color', new THREE.BufferAttribute(diskColors, 3));
-
-  const diskMat = new THREE.PointsMaterial({
-    size: 0.12,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    sizeAttenuation: true
-  });
-
-  const disk = new THREE.Points(diskGeo, diskMat);
-  disk.position.copy(core.position);
-  scene.add(disk);
-
-  const starCount = 5000;
-  const starGeo = new THREE.BufferGeometry();
-  const starPositions = new Float32Array(starCount * 3);
-  const starColors = new Float32Array(starCount * 3);
-
-  for (let i = 0; i < starCount; i++) {
-    starPositions[i * 3] = (Math.random() - 0.5) * 150;
-    starPositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
-    starPositions[i * 3 + 2] = (Math.random() - 0.5) * 200 - 50;
-
-    const c = Math.random() > 0.8 ? colorGlow : colorWhite;
-    starColors[i * 3] = c.r;
-    starColors[i * 3 + 1] = c.g;
-    starColors[i * 3 + 2] = c.b;
-  }
-
-  starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-  starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-
-  const starMat = new THREE.PointsMaterial({
-    size: 0.08,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.6,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
-  });
-
-  const stars = new THREE.Points(starGeo, starMat);
-  scene.add(stars);
-
-  let scrollProgress = 0;
-  let targetScroll = 0;
-  
-  function updateScroll() {
-    targetScroll = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
-  }
-  window.addEventListener('scroll', updateScroll);
-
-  const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-  window.addEventListener('mousemove', (e) => {
-    mouse.tx = (e.clientX / window.innerWidth - 0.5) * 2;
-    mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
-  });
-
-  const clock = new THREE.Clock();
-  function animate() {
-    const t = clock.getElapsedTime();
-    scrollProgress += (targetScroll - scrollProgress) * 0.05;
-
-    const camZ = 20 - scrollProgress * 60;
-    camera.position.z = camZ;
-    
-    mouse.x += (mouse.tx - mouse.x) * 0.05;
-    mouse.y += (mouse.ty - mouse.y) * 0.05;
-    camera.position.x = mouse.x * 2;
-    camera.position.y = 2 - mouse.y * 1.5 - scrollProgress * 5;
-    camera.lookAt(0, 0, -30);
-
-    disk.rotation.y = t * 0.05;
-    disk.rotation.z = -0.2;
-    
-    glow.scale.setScalar(1 + Math.sin(t * 2) * 0.05);
-    stars.rotation.y = t * 0.01;
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
+<script>
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let cx = 0, cy = 0, rx = 0, ry = 0;
@@ -1199,47 +606,40 @@
     cursorDot.style.left = cx + 'px';
     cursorDot.style.top = cy + 'px';
   });
-  
   function followRing() {
-    rx += (cx - rx) * 0.18;
-    ry += (cy - ry) * 0.18;
+    rx += (cx - rx) * 0.1;
+    ry += (cy - ry) * 0.1;
     cursorRing.style.left = rx + 'px';
     cursorRing.style.top = ry + 'px';
     requestAnimationFrame(followRing);
   }
   followRing();
-  
-  document.querySelectorAll('a, button, .project-card, .skill-card, .contact-link, input, textarea, .dot, .gallery-item').forEach(el => {
+  document.querySelectorAll('a, button, .gallery-item, .skill-card, .edu-card, input, textarea').forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
+  });
+
+  const orbs = [document.getElementById('orb1'), document.getElementById('orb2')];
+  const heroImage = document.getElementById('heroImage');
+  
+  document.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
+    orbs.forEach((orb, i) => {
+      const speed = (i + 1) * 15;
+      orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+    });
+
+    if(heroImage) {
+      heroImage.style.transform = `translate(calc(-50% + ${x * -10}px), ${y * -10}px)`;
+    }
   });
 
   const progressBar = document.getElementById('scrollProgress');
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = pct + '%';
-  });
-
-  const dots = document.querySelectorAll('.side-nav .dot');
-  const sections = ['hero','about','skills','experience','gallery','motion','brand','education','contact']
-    .map(id => document.getElementById(id));
-
-  function syncDots() {
-    const trigger = window.scrollY + window.innerHeight * 0.4;
-    let activeIdx = 0;
-    sections.forEach((sec, i) => {
-      if (sec.offsetTop <= trigger) activeIdx = i;
-    });
-    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-  }
-  window.addEventListener('scroll', syncDots);
-  syncDots();
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const id = dot.dataset.section;
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    });
   });
 
   const observer = new IntersectionObserver((entries) => {
@@ -1249,27 +649,13 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  
+  }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-  });
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-  const form = document.getElementById('contactForm');
-  const toast = document.getElementById('toast');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    toast.classList.add('show');
-    form.reset();
-    setTimeout(() => toast.classList.remove('show'), 3500);
-  });
-
-  updateScroll();
 </script>
 
 </body>
