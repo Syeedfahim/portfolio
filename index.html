@@ -232,7 +232,8 @@
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
   /* Mobile Responsive Fixes - Refined */
- @media (max-width: 900px) {
+   /* Mobile Responsive Fixes - Refined */
+  @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-toggle { display: block; }
     .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: rgba(0,0,0,0.95); padding: 20px; border-radius: 20px; gap: 16px; }
@@ -243,21 +244,28 @@
       padding-bottom: 60px;
       display: flex;
       flex-direction: column;
-      align-items: center; /* Center align hero content */
+      align-items: center;
+      overflow-x: hidden; /* Prevents horizontal scroll */
     }
     .hero-img-wrap {
       position: relative;
       top: 0;
       left: 0;
-      transform: none !important; /* Force stop JS from shifting it */
+      transform: none !important;
       width: 100%;
       max-width: 100%;
       height: 450px;
-      margin: 0 auto 40px; /* Center the image wrapper */
+      margin: 0 auto 40px;
       opacity: 0.9;
+      display: flex; /* Centers the image perfectly */
+      justify-content: center;
+      align-items: flex-start;
     }
     .hero-img-wrap img {
-      object-fit: contain; /* Use contain so it never cuts off horizontally */
+      width: auto; /* Fits by height, stops horizontal stretching */
+      max-width: 100%;
+      height: 100%;
+      object-fit: contain;
       object-position: center top;
       -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
@@ -644,27 +652,9 @@
   let cx = 0, cy = 0, rx = 0, ry = 0;
   
   document.addEventListener('mousemove', (e) => {
-    cx = e.clientX; cy = e.clientY;
-    cursorDot.style.left = cx + 'px';
-    cursorDot.style.top = cy + 'px';
-  });
-  function followRing() {
-    rx += (cx - rx) * 0.1;
-    ry += (cy - ry) * 0.1;
-    cursorRing.style.left = rx + 'px';
-    cursorRing.style.top = ry + 'px';
-    requestAnimationFrame(followRing);
-  }
-  followRing();
-  document.querySelectorAll('a, button, .gallery-item, .skill-card, .edu-card, input, textarea').forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
-    el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
-  });
+    // Stop parallax effect on mobile devices to prevent image shifting
+    if (window.innerWidth <= 900) return; 
 
-  const orbs = [document.getElementById('orb1'), document.getElementById('orb2')];
-  const heroImage = document.getElementById('heroImage');
-  
-  document.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
