@@ -232,35 +232,40 @@
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
   /* Mobile Responsive Fixes - Refined */
-  @media (max-width: 900px) {
+ @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-toggle { display: block; }
     .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: rgba(0,0,0,0.95); padding: 20px; border-radius: 20px; gap: 16px; }
     
     .hero {
-      min-height: auto; /* Allow natural height */
+      min-height: auto;
       padding-top: 100px;
       padding-bottom: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Center align hero content */
     }
     .hero-img-wrap {
-      position: relative; /* Put in normal flow */
+      position: relative;
       top: 0;
-      transform: none;
+      left: 0;
+      transform: none !important; /* Force stop JS from shifting it */
       width: 100%;
       max-width: 100%;
-      height: 450px; /* Fixed height for neat look */
-      margin-bottom: 40px;
+      height: 450px;
+      margin: 0 auto 40px; /* Center the image wrapper */
       opacity: 0.9;
     }
     .hero-img-wrap img {
-      object-fit: cover; /* Cover the area */
-      object-position: center top; /* Keep face intact at top */
+      object-fit: contain; /* Use contain so it never cuts off horizontally */
+      object-position: center top;
       -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
     }
     .hero-content {
       grid-template-columns: 1fr;
       gap: 30px;
+      width: 100%;
     }
     
     .edu-grid { grid-template-columns: 1fr; }
@@ -485,6 +490,13 @@
             <div class="gallery-title">Libasul Haya Polo Campaign</div>
           </div>
         </a>
+<a href="https://www.behance.net/gallery/252178119/Aiyaan-Perfume-Campaign-Fragrance-Advertising-Design" target="_blank" class="gallery-item reveal">
+  <img src="https://z-cdn-media.chatglm.cn/files/1f88e006-224f-43b9-bf84-804c67043c8f.png?auth_key=1884714739-04d5145b9ef3430e9b8ffc2abb771c8c-0-1091003e52fe4bf9843551b92bacc3cd" alt="Fragrance Attar Advertising Design">
+  <div class="gallery-overlay">
+    <div class="gallery-cat">Advertising · Product Design</div>
+    <div class="gallery-title">Fragrance Attar Advertising Design</div>
+  </div>
+</a>
         <a href="https://www.behance.net/gallery/252287223/Wallframes-Social-Media-Design-Spiritual-Minimalism" target="_blank" class="gallery-item reveal">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Visuals">
           <div class="gallery-overlay">
