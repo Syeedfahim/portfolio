@@ -46,7 +46,6 @@
   .display { font-family: 'Syne', sans-serif; letter-spacing: -0.03em; }
   .mono { font-family: 'JetBrains Mono', monospace; }
 
-  /* ===== WebGL Canvas ===== */
   #webgl {
     position: fixed;
     top: 0; left: 0;
@@ -78,7 +77,6 @@
     justify-content: center;
   }
 
-  /* ===== Custom Cursor ===== */
   .cursor-dot, .cursor-ring {
     position: fixed;
     pointer-events: none;
@@ -99,7 +97,6 @@
     .cursor-dot, .cursor-ring { display: none; }
   }
 
-  /* ===== Scroll Progress ===== */
   .scroll-progress {
     position: fixed; top: 0; left: 0; height: 2px;
     background: linear-gradient(90deg, var(--primary), var(--glow), #fff);
@@ -108,7 +105,6 @@
     box-shadow: 0 0 12px var(--glow);
   }
 
-  /* ===== Nav ===== */
   nav.topnav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 50;
     padding: 24px 6vw;
@@ -145,7 +141,6 @@
   .nav-cta::after { display: none; }
   .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 22px; cursor: none; }
 
-  /* ===== Side Navigation ===== */
   .side-nav { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 16px; }
   .side-nav .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: none; transition: all 0.3s; position: relative; }
   .side-nav .dot.active { background: var(--glow); transform: scale(1.5); box-shadow: 0 0 12px var(--glow); }
@@ -153,12 +148,10 @@
   .side-nav .dot:hover::before { opacity: 1; }
   @media (max-width: 900px) { .side-nav { display: none; } }
 
-  /* ===== Section Label ===== */
   .section-label { display: flex; align-items: center; gap: 14px; font-family: 'JetBrains Mono'; font-size: 12px; color: var(--glow); letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 32px; font-weight: 500; }
   .section-label .line { width: 50px; height: 1px; background: linear-gradient(90deg, var(--glow), transparent); }
   .section-label .num { color: var(--muted); }
 
-  /* ===== Hero ===== */
   .hero { padding-top: 160px; }
   .hero-eyebrow { display: inline-flex; align-items: center; gap: 12px; padding: 8px 18px; background: rgba(74, 108, 247, 0.08); border: 1px solid rgba(74, 108, 247, 0.25); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--glow); margin-bottom: 36px; backdrop-filter: blur(10px); width: fit-content; }
   .pulse { width: 7px; height: 7px; background: var(--glow); border-radius: 50%; box-shadow: 0 0 0 0 var(--glow); animation: pulse 2s infinite; }
@@ -182,7 +175,6 @@
   .stat .num { font-family: 'Syne'; font-size: clamp(32px, 4vw, 48px); font-weight: 700; line-height: 1; background: linear-gradient(180deg, #FFFFFF 0%, var(--muted) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .stat .label { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 8px; }
 
-  /* ===== About ===== */
   .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: center; max-width: 1400px; }
   .about-image-wrap { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; }
   .about-image-wrap::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--primary), var(--glow), #000); border-radius: 26px; z-index: -1; opacity: 0.6; filter: blur(20px); }
@@ -204,7 +196,6 @@
   .fact .value { font-size: 15px; font-weight: 600; color: var(--text); }
   .fact .value i { color: var(--glow); margin-right: 8px; }
 
-  /* ===== Skills ===== */
   .skills-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 30px; }
   .skills-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; max-width: 800px; }
   .skills-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
@@ -222,7 +213,6 @@
   .skill-card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
   .skill-card .category { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
-  /* ===== Experience ===== */
   .exp-header { margin-bottom: 60px; }
   .exp-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; }
   .exp-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
@@ -244,7 +234,6 @@
   .timeline-desc li { padding: 4px 0 4px 18px; position: relative; }
   .timeline-desc li::before { content: '→'; position: absolute; left: 0; color: var(--glow); font-weight: 700; }
 
-  /* ===== Gallery / Portfolio ===== */
   .gallery-header { margin-bottom: 60px; }
   .gallery-heading { font-family: 'Syne'; font-size: clamp(40px, 6vw, 80px); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; }
   .gallery-heading em { font-style: italic; font-weight: 400; color: var(--glow); }
@@ -254,6 +243,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
+  .gallery-link { text-decoration: none; color: inherit; display: block; }
   .gallery-item {
     position: relative;
     aspect-ratio: 4/5;
@@ -304,8 +294,77 @@
     font-weight: 700;
     color: #fff;
   }
+  .gallery-external-icon {
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 36px; height: 36px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--border-strong);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--glow);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s;
+  }
+  .gallery-item:hover .gallery-external-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-  /* ===== Education ===== */
+  /* Motion & Video Section */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .video-card {
+    position: relative;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.4s;
+    background: var(--bg-2);
+  }
+  .video-card:hover {
+    border-color: var(--glow);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+  .video-card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* Brand Identity Section */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .brand-card {
+    padding: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    backdrop-filter: blur(20px);
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--primary), var(--glow)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+  .brand-card:hover::before { transform: scaleX(1); }
+  .brand-card:hover { border-color: var(--glow); background: rgba(0, 24, 79, 0.3); transform: translateY(-5px); }
+  .brand-card h3 { font-family: 'Syne'; font-size: 24px; margin-bottom: 10px; font-weight: 700; }
+  .brand-card p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+  .brand-card .tag { display: inline-block; padding: 4px 12px; background: rgba(74, 108, 247, 0.1); border: 1px solid rgba(74, 108, 247, 0.3); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--glow); margin-top: 18px; text-transform: uppercase; letter-spacing: 0.1em; }
+
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1200px; }
   .edu-card { padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; backdrop-filter: blur(20px); transition: all 0.3s; position: relative; overflow: hidden; }
   .edu-card::before { content: ''; position: absolute; top: 0; left: 0; width: 60px; height: 3px; background: linear-gradient(90deg, var(--glow), transparent); transition: width 0.4s; }
@@ -319,7 +378,6 @@
   .edu-pill { padding: 4px 10px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
   .edu-pill.gpa { background: rgba(74, 108, 247, 0.1); border-color: rgba(74, 108, 247, 0.3); color: var(--glow); }
 
-  /* ===== Contact ===== */
   .contact-wrap { max-width: 1200px; margin: 0 auto; width: 100%; }
   .contact-heading { font-family: 'Syne'; font-size: clamp(48px, 8vw, 130px); font-weight: 700; line-height: 0.88; letter-spacing: -0.04em; margin-bottom: 50px; }
   .contact-heading em { font-style: italic; font-weight: 400; background: linear-gradient(120deg, #fff, var(--glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -344,7 +402,6 @@
   .form-submit { width: 100%; padding: 16px; background: var(--primary); color: var(--text); border: 1px solid var(--glow); border-radius: 10px; font-weight: 700; font-size: 14px; cursor: none; transition: all 0.3s; letter-spacing: 0.02em; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; }
   .form-submit:hover { transform: translateY(-2px); background: var(--primary-light); box-shadow: 0 12px 30px rgba(74, 108, 247, 0.3); }
 
-  /* ===== Footer ===== */
   footer { padding: 50px 6vw 30px; border-top: 1px solid var(--border); position: relative; z-index: 3; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); }
   .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
   .footer-copy { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--muted); letter-spacing: 0.05em; }
@@ -352,18 +409,15 @@
   .footer-socials a { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px; color: var(--muted); text-decoration: none; transition: all 0.3s; }
   .footer-socials a:hover { background: var(--primary); color: #fff; border-color: var(--glow); transform: translateY(-3px); }
 
-  /* ===== Reveal Animation ===== */
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
   .reveal:nth-child(2) { transition-delay: 0.1s; }
   .reveal:nth-child(3) { transition-delay: 0.2s; }
   .reveal:nth-child(4) { transition-delay: 0.3s; }
 
-  /* ===== Toast ===== */
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(120px); padding: 16px 28px; background: var(--primary); border: 1px solid var(--glow); color: var(--text); border-radius: 12px; font-weight: 600; font-size: 14px; z-index: 1000; box-shadow: 0 14px 40px rgba(74, 108, 247, 0.3); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; align-items: center; gap: 10px; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
-  /* ===== Responsive ===== */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-toggle { display: block; }
@@ -404,6 +458,8 @@
   <button class="dot" data-label="Toolkit" data-section="skills"></button>
   <button class="dot" data-label="Trajectory" data-section="experience"></button>
   <button class="dot" data-label="Gallery" data-section="gallery"></button>
+  <button class="dot" data-label="Motion" data-section="motion"></button>
+  <button class="dot" data-label="Identity" data-section="brand"></button>
   <button class="dot" data-label="Education" data-section="education"></button>
   <button class="dot" data-label="Contact" data-section="contact"></button>
 </div>
@@ -421,6 +477,8 @@
     <a href="#skills">Toolkit</a>
     <a href="#experience">Experience</a>
     <a href="#gallery">Gallery</a>
+    <a href="#motion">Motion</a>
+    <a href="#brand">Identity</a>
     <a href="#education">Education</a>
     <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="nav-cta">Let's Talk</a>
   </div>
@@ -486,7 +544,7 @@
           I'm a creative and results-driven professional with a strong foundation in graphic design and content development. I deliver high-quality visual content and strategic narratives for e-commerce, social media, and brand campaigns.
         </p>
         <p class="about-bio reveal">
-          Proficient in <strong>Adobe Photoshop, Illustrator, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.
+          Proficient in <strong>Adobe Photoshop, Illustrator, After Effects, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.
         </p>
         <div class="facts-grid reveal">
           <div class="fact">
@@ -522,12 +580,12 @@
         Tools that <em>shape</em> the<br>idea into form.
       </h2>
       <p class="skills-intro reveal">
-        A hybrid stack of traditional design software and AI-assisted creative engines — chosen for speed, scale, and storytelling power.
+        A hybrid stack of traditional design software, motion graphics, and AI-assisted creative engines.
       </p>
     </div>
 
     <div class="skill-group reveal">
-      <div class="skill-group-title">Design Tools</div>
+      <div class="skill-group-title">Design & Motion Tools</div>
       <div class="skills-grid">
         <div class="skill-card">
           <div class="icon"><i class="fas fa-layer-group"></i></div>
@@ -541,8 +599,13 @@
         </div>
         <div class="skill-card">
           <div class="icon"><i class="fas fa-film"></i></div>
+          <div class="name">After Effects</div>
+          <div class="category">Motion · VFX</div>
+        </div>
+        <div class="skill-card">
+          <div class="icon"><i class="fas fa-video"></i></div>
           <div class="name">CapCut</div>
-          <div class="category">Motion · Social</div>
+          <div class="category">Editing · Social</div>
         </div>
       </div>
     </div>
@@ -659,59 +722,135 @@
       </h2>
     </div>
 
-    <!-- 
-      INSTRUCTIONS FOR USER: 
-      Replace the src="..." links below with your actual image links.
-      You can upload your images to Imgur/Postimages and paste the direct link here.
-    -->
     <div class="gallery-grid">
-      <!-- Item 1 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling Banner">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">Social Media · Banner</div>
-          <div class="gallery-title">Book Storytelling Campaign</div>
+      <a href="https://www.behance.net/gallery/242981181/Creative-Book-Promotion-Social-Media-Advertising" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling Banner">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Social Media · Banner</div>
+            <div class="gallery-title">Book Storytelling Campaign</div>
+          </div>
         </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/245717705/Polo-Shirt-Social-Media-Campaign-for-Libasul-Haya" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8b8e49245717705.69b36d09093f5.png" alt="Libasul Haya">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Fashion · E-commerce</div>
+            <div class="gallery-title">Libasul Haya Polo Campaign</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/252287223/Wallframes-Social-Media-Design-Spiritual-Minimalism" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Product Visuals">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Branding · Packaging</div>
+            <div class="gallery-title">Aiyaan Product Visuals</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/249976821/Brooks-Glycerin-Max-2-Concept-Campaign" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e5538d249976821.6a143ca0b0657.png" alt="AI-Assisted Creative">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">AI · Generative</div>
+            <div class="gallery-title">AI-Assisted Creative</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/gallery/199473481/Social-Media-Day-Banner-Connecting-Disorders" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/26b1a8199473481.665223017f9f6.jpg" alt="Connecting Disorder Posters">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Digital · Awareness</div>
+            <div class="gallery-title">Connecting Disorder Posters</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.behance.net/" target="_blank" class="gallery-link reveal">
+        <div class="gallery-item">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/00c506252580593.6a53689859e12.jpg" alt="Promotional Video Stills">
+          <div class="gallery-external-icon"><i class="fas fa-arrow-up-right-from-square"></i></div>
+          <div class="gallery-overlay">
+            <div class="gallery-cat">Video · Motion</div>
+            <div class="gallery-title">Promotional Video Stills</div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- MOTION & STORYTELLING -->
+  <section id="motion">
+    <div class="section-label reveal">
+      <span class="line"></span>
+      <span class="num">05</span>
+      <span>Motion & Storytelling</span>
+    </div>
+    <div class="gallery-header">
+      <h2 class="gallery-heading reveal">
+        Visuals in <em>motion</em><br>and stories.
+      </h2>
+      <p class="about-bio reveal" style="max-width: 800px; margin-top: 20px;">
+        A collection of motion graphics, promotional videos, and storytelling visual history designed for <strong>Wafilife</strong> and other creative campaigns.
+      </p>
+    </div>
+
+    <div class="motion-grid">
+      <div class="video-card reveal">
+        <iframe src="https://www.youtube.com/embed/_LYxnJ2IvoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <!-- Item 2 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8b8e49245717705.69b36d09093f5.png">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">Fashion · E-commerce</div>
-          <div class="gallery-title">Libasul Haya Polo Campaign</div>
-        </div>
+      <div class="video-card reveal">
+        <iframe src="https://www.youtube.com/embed/5GnEbNhKqW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <!-- Item 3 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">Branding · Packaging</div>
-          <div class="gallery-title">Aiyaan Product Visuals</div>
-        </div>
+      <div class="video-card reveal">
+        <iframe src="https://www.youtube.com/embed/wyFkxbF5IBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
-      <!-- Item 4 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e5538d249976821.6a143ca0b0657.png">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">AI · Generative</div>
-          <div class="gallery-title">AI-Assisted Creative</div>
-        </div>
+    </div>
+  </section>
+
+  <!-- BRAND IDENTITY -->
+  <section id="brand">
+    <div class="section-label reveal">
+      <span class="line"></span>
+      <span class="num">06</span>
+      <span>Brand Identity</span>
+    </div>
+    <div class="gallery-header">
+      <h2 class="gallery-heading reveal">
+        Crafting <em>identities</em><br>from scratch.
+      </h2>
+      <p class="about-bio reveal" style="max-width: 800px; margin-top: 20px;">
+        Logo design and comprehensive brand identity systems built to resonate with target audiences and maintain visual consistency.
+      </p>
+    </div>
+
+    <div class="brand-grid">
+      <div class="brand-card reveal">
+        <h3>Aiyaan Lifestyle</h3>
+        <p>Complete brand identity design, including logo, color palette, typography, and packaging direction for a premium gifts and home decor brand.</p>
+        <span class="tag">Logo · Packaging · Direction</span>
       </div>
-      <!-- Item 5 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/26b1a8199473481.665223017f9f6.jpg">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">Digital · Awareness</div>
-          <div class="gallery-title">Connecting Disorder Posters</div>
-        </div>
+      <div class="brand-card reveal">
+        <h3>Lust Manager</h3>
+        <p>Modern and sleek visual identity development for a digital platform, focusing on minimalist UI aesthetics and clear brand communication.</p>
+        <span class="tag">Digital · Typography</span>
       </div>
-      <!-- Item 6 -->
-      <div class="gallery-item reveal">
-        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/00c506252580593.6a53689859e12.jpg">
-        <div class="gallery-overlay">
-          <div class="gallery-cat">Video · Motion</div>
-          <div class="gallery-title">Promotional Video Stills</div>
-        </div>
+      <div class="brand-card reveal">
+        <h3>Connecting Disorder</h3>
+        <p>Empathetic and impactful visual branding for a youth-led voluntary organization supporting individuals with communication disorders.</p>
+        <span class="tag">Campaign · Awareness</span>
       </div>
     </div>
   </section>
@@ -720,7 +859,7 @@
   <section id="education">
     <div class="section-label reveal">
       <span class="line"></span>
-      <span class="num">05</span>
+      <span class="num">07</span>
       <span>Education</span>
     </div>
     <div class="exp-header" style="margin-bottom: 50px;">
@@ -772,7 +911,7 @@
     <div class="contact-wrap">
       <div class="section-label reveal">
         <span class="line"></span>
-        <span class="num">06</span>
+        <span class="num">08</span>
         <span>Contact</span>
       </div>
       <h2 class="contact-heading reveal">
@@ -860,7 +999,6 @@
 <script type="module">
   import * as THREE from 'three';
 
-  // ===================== Three.js Scene =====================
   const canvas = document.getElementById('webgl');
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.025);
@@ -873,20 +1011,17 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setClearColor(0x000000, 1);
 
-  // ===================== Lighting =====================
   scene.add(new THREE.AmbientLight(0xffffff, 0.2));
   const pointLight = new THREE.PointLight(0x4A6CF7, 2, 100);
   pointLight.position.set(0, 0, -20);
   scene.add(pointLight);
 
-  // ===================== Black Hole Core =====================
   const coreGeo = new THREE.SphereGeometry(3, 32, 32);
   const coreMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
   const core = new THREE.Mesh(coreGeo, coreMat);
   core.position.set(0, 0, -30);
   scene.add(core);
 
-  // Glowing event horizon
   const glowGeo = new THREE.SphereGeometry(3.2, 32, 32);
   const glowMat = new THREE.MeshBasicMaterial({ 
     color: 0x4A6CF7, 
@@ -898,7 +1033,6 @@
   glow.position.copy(core.position);
   scene.add(glow);
 
-  // ===================== Accretion Disk (Galaxy Swirl) =====================
   const diskCount = 25000;
   const diskGeo = new THREE.BufferGeometry();
   const diskPositions = new Float32Array(diskCount * 3);
@@ -950,7 +1084,6 @@
   disk.position.copy(core.position);
   scene.add(disk);
 
-  // ===================== Background Stars =====================
   const starCount = 5000;
   const starGeo = new THREE.BufferGeometry();
   const starPositions = new Float32Array(starCount * 3);
@@ -982,7 +1115,6 @@
   const stars = new THREE.Points(starGeo, starMat);
   scene.add(stars);
 
-  // ===================== Scroll & Mouse =====================
   let scrollProgress = 0;
   let targetScroll = 0;
   
@@ -997,31 +1129,24 @@
     mouse.ty = (e.clientY / window.innerHeight - 0.5) * 2;
   });
 
-  // ===================== Animation Loop =====================
   const clock = new THREE.Clock();
   function animate() {
     const t = clock.getElapsedTime();
     scrollProgress += (targetScroll - scrollProgress) * 0.05;
 
-    // Camera flies through space towards the black hole
     const camZ = 20 - scrollProgress * 60;
     camera.position.z = camZ;
     
-    // Slight camera offset based on mouse
     mouse.x += (mouse.tx - mouse.x) * 0.05;
     mouse.y += (mouse.ty - mouse.y) * 0.05;
     camera.position.x = mouse.x * 2;
     camera.position.y = 2 - mouse.y * 1.5 - scrollProgress * 5;
     camera.lookAt(0, 0, -30);
 
-    // Rotate accretion disk
     disk.rotation.y = t * 0.05;
     disk.rotation.z = -0.2;
     
-    // Pulsating glow
     glow.scale.setScalar(1 + Math.sin(t * 2) * 0.05);
-
-    // Rotate stars slowly
     stars.rotation.y = t * 0.01;
 
     renderer.render(scene, camera);
@@ -1029,14 +1154,12 @@
   }
   animate();
 
-  // ===================== Resize =====================
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // ===================== Custom Cursor =====================
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let cx = 0, cy = 0, rx = 0, ry = 0;
@@ -1061,16 +1184,14 @@
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
   });
 
-  // ===================== Scroll Progress Bar =====================
   const progressBar = document.getElementById('scrollProgress');
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = pct + '%';
   });
 
-  // ===================== Side Nav Dots =====================
   const dots = document.querySelectorAll('.side-nav .dot');
-  const sections = ['hero','about','skills','experience','gallery','education','contact']
+  const sections = ['hero','about','skills','experience','gallery','motion','brand','education','contact']
     .map(id => document.getElementById(id));
 
   function syncDots() {
@@ -1091,7 +1212,6 @@
     });
   });
 
-  // ===================== Reveal on Scroll =====================
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1103,7 +1223,6 @@
   
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ===================== Mobile Menu =====================
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
   menuToggle.addEventListener('click', () => {
@@ -1111,7 +1230,6 @@
   });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-  // ===================== Contact Form =====================
   const form = document.getElementById('contactForm');
   const toast = document.getElementById('toast');
   form.addEventListener('submit', (e) => {
