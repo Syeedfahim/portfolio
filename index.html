@@ -1,21 +1,16 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Syeed Hossain Fahim — Content Developer & Designer</title>
 <meta name="description" content="Visual storyteller and content developer blending design, AI, and brand narratives." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root {
-    --bg-dark: #01040c;
-    --bg-blue: #04327f;
-    --glow-blue: #1e5fc5;
-    --text: #ffffff;
-    --text-soft: #e0e6f0;
-    --muted: #8a9bb8;
     --bg-dark: #030712;
     --bg-deep: #06101f;
     --bg-blue: #0a3d8f;
@@ -26,9 +21,6 @@
     --text-soft: #d5dcef;
     --muted: #8b97b3;
     --border: rgba(255, 255, 255, 0.08);
-    --glass: rgba(255, 255, 255, 0.02);
-    --glass-hover: rgba(255, 255, 255, 0.05);
-    --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     --border-strong: rgba(255, 255, 255, 0.16);
     --glass: rgba(10, 18, 36, 0.42);
     --glass-hover: rgba(255, 255, 255, 0.06);
@@ -42,13 +34,11 @@
   html, body { max-width: 100%; }
   body {
     color: var(--text-soft);
-    font-family: 'Poppins', sans-serif;
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
     min-height: 100vh;
     cursor: none;
     background-color: var(--bg-dark);
-    background-image: linear-gradient(to bottom, rgba(1,4,12,0.6), rgba(4,50,127,0.3)), url('https://z-cdn-media.chatglm.cn/files/06939182-a5a6-4a73-ab7b-298bb146d133.png?auth_key=1884707972-75e8a3b31e6d446499bd45eb680b4fa6-0-82d8c60d3b0f845fad04468306936874');
     background-image:
       radial-gradient(1200px 600px at 50% -10%, rgba(26, 74, 168, 0.28), transparent 60%),
       linear-gradient(to bottom, rgba(3,7,18,0.72), rgba(6,16,31,0.55) 40%, rgba(3,7,18,0.88)),
@@ -62,7 +52,6 @@
   ::selection { background: rgba(91, 140, 255, 0.35); color: #fff; }
   a, button { -webkit-tap-highlight-color: transparent; }
 
-  /* Atmosphere */
   .noise, .vignette {
     pointer-events: none;
     position: fixed;
@@ -83,18 +72,10 @@
   .cursor-dot, .cursor-ring {
     position: fixed; pointer-events: none; z-index: 9999;
     border-radius: 50%; transform: translate(-50%, -50%);
-    will-change: transform;
     will-change: transform, width, height;
   }
-  .cursor-dot {
-    width: 7px; height: 7px; background: #fff;
-    box-shadow: 0 0 12px rgba(255,255,255,0.6);
-  }
-  .cursor-dot { width: 6px; height: 6px; background: #fff; }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; box-shadow: 0 0 12px rgba(255,255,255,0.6); }
   .cursor-ring {
-    width: 32px; height: 32px;
-    border: 1px solid rgba(255,255,255,0.3);
-    transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     width: 38px; height: 38px;
     border: 1px solid rgba(255,255,255,0.28);
     background: rgba(255,255,255,0.02);
@@ -110,13 +91,10 @@
     body { cursor: auto; }
     .cursor-dot, .cursor-ring { display: none; }
   }
-  .cursor-ring.expand { width: 60px; height: 60px; border-color: var(--glow-blue); background: rgba(30, 95, 197, 0.05); }
-  @media (max-width: 768px) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none; } }
 
   /* Dynamic Soft Orbs */
   .orb {
     position: fixed; border-radius: 50%; filter: blur(120px);
-    z-index: -1; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     z-index: -1; transition: transform 0.7s var(--ease);
     will-change: transform;
     animation: drift 18s ease-in-out infinite alternate;
@@ -127,20 +105,13 @@
     from { transform: translate(0, 0) scale(1); }
     to { transform: translate(40px, -30px) scale(1.08); }
   }
-  .orb-1 { width: 600px; height: 600px; background: var(--bg-blue); top: -200px; left: -200px; opacity: 0.3; }
-  .orb-2 { width: 500px; height: 500px; background: var(--glow-blue); bottom: -100px; right: -100px; opacity: 0.2; }
 
   main { position: relative; z-index: 3; }
-  section { padding: 80px 6vw; position: relative; }
-  
-  .container { max-width: 1200px; margin: 0 auto; width: 100%; }
   section { padding: 110px 6vw; position: relative; }
   .container { max-width: 1180px; margin: 0 auto; width: 100%; }
 
   .scroll-progress {
     position: fixed; top: 0; left: 0; height: 2px;
-    background: linear-gradient(90deg, var(--bg-blue), var(--glow-blue), #fff);
-    z-index: 100; width: 0%; box-shadow: 0 0 10px var(--glow-blue);
     background: linear-gradient(90deg, #1d4ed8, var(--glow-blue), #fff);
     z-index: 100; width: 0%;
     box-shadow: 0 0 16px var(--glow-blue);
@@ -148,15 +119,10 @@
   }
 
   nav.topnav {
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-    z-index: 50; width: calc(100% - 48px); max-width: 1200px;
-    padding: 14px 28px;
     position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
     z-index: 50; width: calc(100% - 36px); max-width: 1180px;
     padding: 12px 16px 12px 20px;
     display: flex; justify-content: space-between; align-items: center;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px) saturate(180%);
     background: rgba(8, 14, 28, 0.45);
     backdrop-filter: blur(22px) saturate(180%);
     border: 1px solid var(--border);
@@ -182,16 +148,7 @@
     font-size: 10px; color: var(--muted); font-weight: 400;
     text-transform: uppercase; letter-spacing: 0.14em; display: block; margin-top: 2px;
   }
-  .logo { font-weight: 500; font-size: 16px; display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); }
-  .logo-mark { width: 36px; height: 36px; background: var(--bg-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; color: #fff; }
-  .logo-text small { font-size: 10px; color: var(--muted); font-weight: 300; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 2px;}
 
-  .nav-links { display: flex; gap: 32px; align-items: center; }
-  .nav-links a { font-size: 13px; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.3s; }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta { padding: 10px 22px; background: #fff; color: var(--bg-dark) !important; border-radius: 100px; font-size: 13px; font-weight: 600; text-decoration: none; transition: transform 0.3s; }
-  .nav-cta:hover { transform: scale(1.05); }
-  .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 20px; cursor: none; }
   .nav-links { display: flex; gap: 22px; align-items: center; }
   .nav-links a {
     font-size: 13px; font-weight: 400; color: var(--muted);
@@ -226,15 +183,11 @@
   }
 
   /* Hero Section */
-  /* Hero */
   .hero {
-    min-height: 95vh;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-top: 100px;
-    padding-bottom: 40px;
     padding-top: 110px;
     padding-bottom: 56px;
     position: relative;
@@ -243,29 +196,22 @@
   
   .hero-img-wrap {
     position: absolute;
-    top: 40px;
     top: 28px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 1100px;
-    height: 85vh;
     max-width: 1080px;
     height: 86vh;
     z-index: 1;
     pointer-events: none;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     transition: transform 0.55s var(--ease);
     will-change: transform;
   }
   .hero-img-wrap img {
+    width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: bottom center;
-    mix-blend-mode: darken; 
-    filter: contrast(1.1) saturate(1.1) drop-shadow(0 10px 40px rgba(4, 50, 127, 0.4));
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
     mix-blend-mode: darken;
     filter: contrast(1.12) saturate(1.08) drop-shadow(0 18px 50px rgba(4, 50, 127, 0.45));
     -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
@@ -273,21 +219,14 @@
   }
 
   .hero-content {
+    position: relative;
     z-index: 2;
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: 60px;
     gap: 56px;
     align-items: end;
   }
   
-  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 100px; font-size: 12px; color: var(--muted); margin-bottom: 24px; backdrop-filter: blur(10px); font-weight: 300; }
-  .pulse { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; animation: pulse 2s infinite; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); } 70% { box-shadow: 0 0 0 10px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
-
-  .hero-title { font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 1.1; letter-spacing: -0.03em; color: var(--text); }
-  .hero-title span { background: linear-gradient(120deg, #FFFFFF 0%, #A0B4FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero-right p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 36px; font-weight: 300; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 8px 16px;
@@ -330,12 +269,6 @@
   }
   .hero-right p strong { color: var(--text); font-weight: 500; }
 
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn { padding: 14px 30px; border-radius: 100px; font-weight: 500; font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition-smooth); border: 1px solid transparent; cursor: none; }
-  .btn-primary { background: #fff; color: var(--bg-dark); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.15); }
-  .btn-ghost { background: rgba(255,255,255,0.03); color: var(--text); border-color: var(--border); backdrop-filter: blur(10px); }
-  .btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
   .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
   .btn {
     padding: 14px 28px; border-radius: 100px; font-weight: 500; font-size: 14px;
@@ -373,12 +306,6 @@
     100% { opacity: 0; transform: translate(-50%, 10px); }
   }
 
-  .section-header { margin-bottom: 50px; max-width: 800px; }
-  .section-label { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--glow-blue); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; font-weight: 400; }
-  .section-label .line { width: 30px; height: 1px; background: var(--glow-blue); }
-  .section-title { font-size: clamp(36px, 5vw, 56px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; color: var(--text); }
-  .section-title em { font-style: normal; color: var(--muted); font-weight: 300; }
-  .section-desc { color: var(--muted); font-size: 16px; line-height: 1.8; margin-top: 20px; font-weight: 300; }
   .section-header { margin-bottom: 56px; max-width: 820px; }
   .section-label {
     display: flex; align-items: center; gap: 12px;
@@ -397,7 +324,6 @@
 
   .glass-card {
     background: var(--glass);
-    backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid var(--border);
     border-radius: 24px;
@@ -405,13 +331,8 @@
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
-  .about-text p { font-size: 17px; line-height: 1.8; color: var(--muted); margin-bottom: 28px; font-weight: 300; }
   .about-text p { font-size: 17.5px; line-height: 1.85; color: var(--muted); margin-bottom: 24px; font-weight: 300; }
   .about-text p strong { color: var(--text); font-weight: 500; }
-  .facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
-  .fact { padding: 24px; background: var(--glass); border: 1px solid var(--border); border-radius: 20px; transition: var(--transition-smooth); }
-  .fact:hover { background: var(--glass-hover); transform: translateY(-4px); }
-  .fact .label { font-size: 11px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 400; }
   .facts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
   .fact {
     padding: 24px;
@@ -425,11 +346,6 @@
   .fact .label { font-size: 11px; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; }
   .fact .value { font-size: 16px; font-weight: 500; color: var(--text); }
 
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
-  .skill-card { padding: 28px; }
-  .skill-card:hover { border-color: rgba(255,255,255,0.15); background: var(--glass-hover); transform: translateY(-5px); }
-  .skill-card .icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 20px; color: #fff; margin-bottom: 20px; }
-  .skill-card .name { font-weight: 500; font-size: 17px; margin-bottom: 4px; color: var(--text); }
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
   .skill-card { padding: 28px; position: relative; overflow: hidden; }
   .skill-card::before {
@@ -449,10 +365,6 @@
   .skill-card .name { font-weight: 600; font-size: 17px; margin-bottom: 4px; color: var(--text); }
   .skill-card .cat { font-size: 12px; color: var(--muted); font-weight: 300; }
 
-  .timeline { position: relative; border-left: 1px solid var(--border); padding-left: 40px; margin-left: 20px; }
-  .timeline-item { position: relative; margin-bottom: 40px; }
-  .timeline-item::before { content: ''; position: absolute; left: -45px; top: 10px; width: 10px; height: 10px; background: var(--bg-dark); border: 2px solid var(--glow-blue); border-radius: 50%; }
-  .timeline-date { font-size: 12px; color: var(--glow-blue); margin-bottom: 12px; font-weight: 400; }
   .timeline { position: relative; border-left: 1px solid var(--border); padding-left: 40px; margin-left: 12px; }
   .timeline::before {
     content: ''; position: absolute; left: -1px; top: 0; width: 2px; height: 0;
@@ -473,10 +385,6 @@
     font-size: 10px; font-weight: 700; letter-spacing: 0.08em; margin-left: 8px;
   }
   .timeline-content { padding: 28px; }
-  .timeline-content:hover { background: var(--glass-hover); }
-  .timeline-role { font-size: 20px; font-weight: 500; margin-bottom: 6px; color: var(--text); }
-  .timeline-company { color: var(--glow-blue); font-size: 14px; margin-bottom: 16px; font-weight: 300; }
-  .timeline-desc { color: var(--muted); font-size: 14px; line-height: 1.7; font-weight: 300; }
   .timeline-content:hover { background: var(--glass-hover); transform: translateX(6px); border-color: var(--border-strong); }
   .timeline-role { font-size: 20px; font-weight: 600; margin-bottom: 6px; color: var(--text); font-family: 'Syne', sans-serif; }
   .timeline-company { color: var(--glow-soft); font-size: 14px; margin-bottom: 14px; font-weight: 400; }
@@ -485,14 +393,6 @@
   .timeline-desc li { padding-left: 18px; position: relative; margin-bottom: 8px; }
   .timeline-desc li::before { content: '→'; position: absolute; left: 0; color: var(--glow-blue); }
 
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 24px; }
-  .gallery-item { position: relative; aspect-ratio: 16/10; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); background: #000; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); opacity: 0.85; will-change: transform; }
-  .gallery-item:hover img { transform: scale(1.04); opacity: 1; }
-  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.9) 100%); padding: 32px; display: flex; flex-direction: column; justify-content: flex-end; }
-  .gallery-cat { font-size: 10px; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; font-weight: 400; }
-  .gallery-title { font-size: 22px; font-weight: 500; color: #ffffff; }
-  .gallery-desc { font-size: 13px; color: rgba(255, 255, 255, 0.7); margin-top: 8px; line-height: 1.5; font-weight: 300; }
   .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(430px, 1fr)); gap: 22px; }
   .gallery-item {
     position: relative; aspect-ratio: 16/10; border-radius: 24px; overflow: hidden;
@@ -524,12 +424,9 @@
   .gallery-title { font-size: 22px; font-weight: 600; color: #fff; font-family: 'Syne', sans-serif; }
   .gallery-desc { font-size: 13px; color: rgba(255,255,255,0.68); margin-top: 8px; line-height: 1.55; font-weight: 300; }
 
-  #brand .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
   #brand .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   #brand .gallery-item { aspect-ratio: 4 / 5; }
 
-  .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px; }
-  .video-card { aspect-ratio: 16/9; border-radius: 24px; overflow: hidden; border: 1px solid var(--border); }
   .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 22px; }
   .video-card {
     aspect-ratio: 16/9; border-radius: 24px; overflow: hidden;
@@ -541,18 +438,12 @@
   .video-card:hover { transform: translateY(-6px); border-color: var(--border-strong); }
   .video-card iframe { width: 100%; height: 100%; border: 0; }
 
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .edu-card { padding: 32px; }
-  .edu-card:hover { background: var(--glass-hover); }
-  .edu-period { font-size: 12px; color: var(--glow-blue); margin-bottom: 14px; font-weight: 400; }
-  .edu-degree { font-size: 20px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
   .edu-card:hover { background: var(--glass-hover); transform: translateY(-6px); border-color: var(--border-strong); }
   .edu-period { font-size: 12px; color: var(--glow-soft); margin-bottom: 12px; font-weight: 500; letter-spacing: 0.04em; }
   .edu-degree { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text); font-family: 'Syne', sans-serif; }
   .edu-school { color: var(--muted); font-size: 14px; margin-bottom: 18px; font-weight: 300; }
-  .edu-pill { display: inline-block; padding: 5px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-size: 11px; color: var(--muted); font-weight: 400; }
-  .edu-pill.gpa { color: #4ade80; border-color: rgba(74,222,128,0.3); background: rgba(74,222,128,0.05); }
   .edu-pill {
     display: inline-block; padding: 5px 14px;
     background: rgba(255,255,255,0.04); border: 1px solid var(--border);
@@ -560,10 +451,6 @@
   }
   .edu-pill.gpa { color: #4ade80; border-color: rgba(74,222,128,0.28); background: rgba(74,222,128,0.08); }
 
-  .contact-wrap { max-width: 800px; margin: 0 auto; text-align: center; }
-  .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 50px; }
-  .contact-link { display: flex; align-items: center; gap: 10px; padding: 14px 26px; background: var(--glass); border: 1px solid var(--border); border-radius: 100px; color: var(--text); text-decoration: none; transition: var(--transition-smooth); backdrop-filter: blur(10px); font-weight: 400; font-size: 14px; }
-  .contact-link:hover { background: var(--glass-hover); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
   .contact-wrap { max-width: 840px; margin: 0 auto; text-align: center; }
   .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 42px; }
   .contact-link {
@@ -575,9 +462,6 @@
   }
   .contact-link:hover { background: var(--glass-hover); border-color: var(--border-strong); transform: translateY(-4px); box-shadow: var(--shadow); }
 
-  footer { padding: 40px 6vw; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--muted); font-weight: 300; }
-  .footer-socials a { color: var(--muted); margin-left: 16px; text-decoration: none; transition: color 0.3s; display: inline-flex; align-items: center; gap: 6px; }
-  .footer-socials a:hover { color: #fff; }
   footer {
     padding: 28px 6vw 40px;
     border-top: 1px solid var(--border);
@@ -591,7 +475,6 @@
   }
   .footer-socials a:hover { color: #fff; transform: translateY(-2px); }
 
-  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity; }
   .reveal {
     opacity: 0;
     transform: translateY(36px);
@@ -600,12 +483,9 @@
   }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-  /* Mobile Responsive Fixes - Refined */
+  /* Mobile Responsive Fixes */
   @media (max-width: 900px) {
     .nav-links { display: none; }
-    .menu-toggle { display: block; }
-    .nav-links.open { display: flex; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: rgba(0,0,0,0.95); padding: 20px; border-radius: 20px; gap: 16px; }
-    
     .menu-toggle { display: grid; place-items: center; cursor: pointer; }
     .nav-links.open {
       display: flex; position: absolute; top: 68px; left: 0; right: 0;
@@ -618,39 +498,18 @@
     .hero {
       min-height: auto;
       padding-top: 100px;
-      padding-bottom: 60px;
-      display: flex;
-      flex-direction: column;
-      align-items: center; 
       padding-bottom: 48px;
       align-items: center;
     }
     .hero-img-wrap {
-      position: relative;
-      top: 0;
-      left: 0;
-      transform: none !important; 
-      width: 100%;
-      max-width: 100%;
-      height: 65vh; 
-      margin: 0 auto 20px; 
-      opacity: 0.95;
       position: relative; top: 0; left: 0; transform: none !important;
       width: 100%; max-width: 100%; height: 62vh; margin: 0 auto 16px; opacity: 0.96;
     }
     .hero-img-wrap img {
-      object-fit: cover; 
-      object-position: top center; 
-      -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
       object-fit: cover; object-position: top center;
       -webkit-mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
     }
-    .hero-content {
-      grid-template-columns: 1fr;
-      gap: 30px;
-      width: 100%;
     .hero-content { grid-template-columns: 1fr; gap: 26px; width: 100%; }
     .scroll-hint { display: none; }
     .edu-grid, .facts-grid { grid-template-columns: 1fr; }
@@ -665,10 +524,6 @@
       animation: none !important;
       transition: none !important;
     }
-    
-    .edu-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr; }
-    section { padding: 60px 5vw; }
     .reveal { opacity: 1; transform: none; }
   }
 </style>
@@ -680,22 +535,54 @@
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<div class="orb orb-2" id="orb2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<nav class="topnav">
 <nav class="topnav" id="topnav">
   <a href="#hero" class="logo">
     <div class="logo-mark">SH</div>
     <div class="logo-text">
+      Syeed Hossain Fahim
+      <small>Content Developer</small>
+    </div>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#about">About</a>
+    <a href="#software">Tools</a>
+    <a href="#ai-skills">AI Skills</a>
+    <a href="#experience">Work</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#thumbnails">Thumbnails</a>
     <a href="#brand">Identity</a>
     <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="nav-cta">Let's Talk</a>
   </div>
-  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
   <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
 </nav>
 
 <main>
+
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-img-wrap reveal" id="heroImage">
+      <img src="https://z-cdn-media.chatglm.cn/files/0ba41af6-836b-432f-9256-e0e550ebdf2b.png?auth_key=1884706798-d364523f01924a7f9aaba6d03ff49115-0-562e9c473a60a8b3157e6ef00492df03" alt="Syeed Hossain Fahim">
+    </div>
+
+    <div class="container">
+      <div class="hero-content reveal">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="pulse"></span>
+            Available for Work · Dhaka
+          </div>
+          <h1 class="hero-title">Visual <span>Storyteller</span><br>& Content Developer</h1>
+        </div>
+        <div class="hero-right">
+          <p>I'm <strong>Syeed Hossain Fahim</strong> — blending design and content development. Currently serving as Content Developer at <strong>lustmanager.com</strong>, while exploring the intersection of AI, visuals, and storytelling.</p>
+          <div class="hero-actions">
+            <a href="#gallery" class="btn btn-primary">View Work <i class="fas fa-arrow-right"></i></a>
+            <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="btn btn-ghost">LinkedIn <i class="fab fa-linkedin-in"></i></a>
+          </div>
         </div>
       </div>
     </div>
@@ -706,14 +593,32 @@
   <section id="about">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 01 · About</div>
+        <h2 class="section-title">Designing at the edge of <em>art</em> and <em>strategy</em>.</h2>
+      </div>
       <div class="about-text reveal">
         <p>I'm a creative and results-driven professional with a strong foundation in graphic design and content development. I deliver high-quality visual content and strategic narratives for e-commerce, social media, and brand campaigns.</p>
         <p>Proficient in <strong>Adobe Photoshop, Illustrator, After Effects, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.</p>
         
-
         <div class="facts-grid">
           <div class="fact">
             <div class="label">Currently</div>
+            <div class="value"><i class="fas fa-briefcase" style="margin-right:8px; color:var(--glow-blue);"></i>lustmanager.com</div>
+          </div>
+          <div class="fact">
+            <div class="label">Founded</div>
+            <div class="value"><i class="fas fa-store" style="margin-right:8px; color:var(--glow-blue);"></i>Aiyaan Lifestyle</div>
+          </div>
+          <div class="fact">
+            <div class="label">Studying</div>
+            <div class="value"><i class="fas fa-graduation-cap" style="margin-right:8px; color:var(--glow-blue);"></i>MSS · Univ. of Dhaka</div>
+          </div>
+          <div class="fact">
+            <div class="label">Focus</div>
+            <div class="value"><i class="fas fa-wand-magic-sparkles" style="margin-right:8px; color:var(--glow-blue);"></i>AI-Assisted Design</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -721,6 +626,31 @@
   <section id="software">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 02 · Software & Tools</div>
+        <h2 class="section-title">Tools that <em>shape</em> the<br>idea into form.</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-layer-group"></i></div>
+          <div class="name">Adobe Photoshop</div>
+          <div class="cat">Raster · Compositing</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-pen-nib"></i></div>
+          <div class="name">Adobe Illustrator</div>
+          <div class="cat">Vector · Branding</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-film"></i></div>
+          <div class="name">After Effects</div>
+          <div class="cat">Motion · VFX</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-video"></i></div>
+          <div class="name">CapCut</div>
+          <div class="cat">Editing · Social</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -728,6 +658,41 @@
   <section id="ai-skills">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 03 · AI Skills & Workflow</div>
+        <h2 class="section-title">Merging <em>creativity</em><br>with artificial intelligence.</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-comments"></i></div>
+          <div class="name">ChatGPT</div>
+          <div class="cat">Copy · Ideation</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-robot"></i></div>
+          <div class="name">Gemini</div>
+          <div class="cat">AI Assistant</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-diagram-project"></i></div>
+          <div class="name">Google Flow</div>
+          <div class="cat">AI Video</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-image"></i></div>
+          <div class="name">Midjourney</div>
+          <div class="cat">Generative Art</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div class="name">Magnific</div>
+          <div class="cat">AI Upscaling</div>
+        </div>
+        <div class="skill-card glass-card reveal">
+          <div class="icon"><i class="fas fa-book"></i></div>
+          <div class="name">NotebookLM</div>
+          <div class="cat">AI Research</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -735,24 +700,63 @@
   <section id="experience">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 04 · Experience</div>
+        <h2 class="section-title">A trajectory through <em>creative</em> space.</h2>
       </div>
       <div class="timeline">
         <div class="timeline-item reveal">
-          <div class="timeline-date">Present <span style="background:#4ade80; color:#000; padding:2px 6px; border-radius:4px; font-size:10px;">NOW</span></div>
           <div class="timeline-date">Present <span class="now-pill">NOW</span></div>
           <div class="timeline-content glass-card">
             <div class="timeline-role">Content Developer</div>
             <div class="timeline-company">lustmanager.com · Remote</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Developing engaging digital content and creative strategies.</li>
+                <li>Producing AI-assisted media, graphics, and marketing materials.</li>
+              </ul>
             </div>
           </div>
         </div>
-                <div class="timeline-item reveal">
-          <div class="timeline-date">Mar '21 — Present <span style="background:#4ade80; color:#000; padding:2px 6px; border-radius:4px; font-size:10px;">NOW</span></div>
         <div class="timeline-item reveal">
           <div class="timeline-date">Mar '21 — Present <span class="now-pill">NOW</span></div>
           <div class="timeline-content glass-card">
             <div class="timeline-role">Creative Director & Founder</div>
             <div class="timeline-company">Aiyaan — Home Decor Company · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Founded and led a home decor brand, independently managing all creative direction.</li>
+                <li>Currently working here, overseeing product packaging and social media campaigns.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Aug '24 — Jun '26</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Graphics Designer</div>
+            <div class="timeline-company">Wafilife - E-commerce Platform · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Designed promotional banners, product visuals, and campaign creatives.</li>
+                <li>Produced AI-assisted video content and motion graphics for social media.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Jan '20 — Jan '22</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Junior Graphics Designer</div>
+            <div class="timeline-company">Connecting Disorder · Youth Voluntary Org · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Designed awareness posters, digital graphics, and event materials for a youth-led voluntary organization supporting individuals with autism and communication disorders.</li>
+                <li>Contributed to campaigns that increased community reach and social media engagement.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -760,10 +764,11 @@
   <section id="gallery">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 05 · Visual Gallery</div>
+        <h2 class="section-title">Selected <em>visuals</em> from<br>the portfolio.</h2>
       </div>
       <div class="gallery-grid">
         <a href="https://www.behance.net/gallery/242981181/Creative-Book-Promotion-Social-Media-Advertising" target="_blank" class="gallery-item reveal">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/07857e242981181.697885fbe6aaf.jpg" alt="Book Storytelling" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Social Media · Banner</div>
@@ -771,7 +776,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/245717705/Polo-Shirt-Social-Media-Campaign-for-Libasul-Haya" target="_blank" class="gallery-item reveal">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8b8e49245717705.69b36d09093f5.png" alt="Libasul Haya">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8b8e49245717705.69b36d09093f5.png" alt="Libasul Haya" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Fashion · E-commerce</div>
@@ -779,7 +783,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/252178119/Aiyaan-Perfume-Campaign-Fragrance-Advertising-Design" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/1f88e006-224f-43b9-bf84-804c67043c8f.png?auth_key=1884714739-04d5145b9ef3430e9b8ffc2abb771c8c-0-1091003e52fe4bf9843551b92bacc3cd" alt="Fragrance Attar Advertising Design">
           <img src="https://z-cdn-media.chatglm.cn/files/1f88e006-224f-43b9-bf84-804c67043c8f.png?auth_key=1884714739-04d5145b9ef3430e9b8ffc2abb771c8c-0-1091003e52fe4bf9843551b92bacc3cd" alt="Fragrance Attar Advertising Design" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Advertising · Product Design</div>
@@ -787,7 +790,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/249976821/Brooks-Glycerin-Max-2-Concept-Campaign" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/90f775f5-7f7a-43e5-a375-357fa5dabf50.png?auth_key=1884715208-d147b0c7d429447981c46e7ee9c33e42-0-6daa1a62fc38f52d7f585a56fa341c7f" alt="Ai Assisted Shoe Advertising Design">
           <img src="https://z-cdn-media.chatglm.cn/files/90f775f5-7f7a-43e5-a375-357fa5dabf50.png?auth_key=1884715208-d147b0c7d429447981c46e7ee9c33e42-0-6daa1a62fc38f52d7f585a56fa341c7f" alt="Ai Assisted Shoe Advertising Design" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">AI · Advertising</div>
@@ -795,7 +797,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/252287223/Wallframes-Social-Media-Design-Spiritual-Minimalism" target="_blank" class="gallery-item reveal">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Visuals">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/4357aa252287223.6a4be97d261ec.png" alt="Aiyaan Visuals" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Branding · Packaging</div>
@@ -803,11 +804,13 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/199473481/Social-Media-Day-Banner-Connecting-Disorders" target="_blank" class="gallery-item reveal">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/26b1a8199473481.665223017f9f6.jpg" alt="Connecting Disorder Posters">
           <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/26b1a8199473481.665223017f9f6.jpg" alt="Connecting Disorder Posters" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Digital · Awareness</div>
             <div class="gallery-title">Connecting Disorder Posters</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -815,10 +818,11 @@
   <section id="thumbnails">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 06 · Thumbnail Design</div>
+        <h2 class="section-title">Engaging <em>YouTube Thumbnails</em><br>that drive clicks.</h2>
       </div>
       <div class="gallery-grid">
         <a href="https://www.behance.net/gallery/253848913/ITS-Academy-Educational-YouTube-Thumbnail-Design?platform=direct" target="_blank" class="gallery-item reveal" style="aspect-ratio: 16/9;">
-          <img src="https://i.pinimg.com/736x/4f/01/b8/4f01b87ca205fc368538cc440a20cc85.jpg" alt="Thumbnail 1">
           <img src="https://i.pinimg.com/736x/4f/01/b8/4f01b87ca205fc368538cc440a20cc85.jpg" alt="Thumbnail 1" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">YouTube Thumbnail</div>
@@ -826,7 +830,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/253848913/ITS-Academy-Educational-YouTube-Thumbnail-Design?platform=direct" target="_blank" class="gallery-item reveal" style="aspect-ratio: 16/9;">
-          <img src="https://i.pinimg.com/736x/54/6b/a0/546ba0e690a6313bb3744f02d2ca671b.jpg" alt="Thumbnail 2">
           <img src="https://i.pinimg.com/736x/54/6b/a0/546ba0e690a6313bb3744f02d2ca671b.jpg" alt="Thumbnail 2" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">YouTube Thumbnail</div>
@@ -834,7 +837,6 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/253848913/ITS-Academy-Educational-YouTube-Thumbnail-Design?platform=direct" target="_blank" class="gallery-item reveal" style="aspect-ratio: 16/9;">
-          <img src="https://i.pinimg.com/736x/26/d4/38/26d43858cfb9b5d73899180a8daa5a85.jpg" alt="Thumbnail 3">
           <img src="https://i.pinimg.com/736x/26/d4/38/26d43858cfb9b5d73899180a8daa5a85.jpg" alt="Thumbnail 3" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">YouTube Thumbnail</div>
@@ -842,11 +844,13 @@
           </div>
         </a>
         <a href="https://www.behance.net/gallery/253848913/ITS-Academy-Educational-YouTube-Thumbnail-Design?platform=direct" target="_blank" class="gallery-item reveal" style="aspect-ratio: 16/9;">
-          <img src="https://i.pinimg.com/736x/2b/b3/14/2bb314e3757d811915a27af2d0a23f39.jpg" alt="Thumbnail 4">
           <img src="https://i.pinimg.com/736x/2b/b3/14/2bb314e3757d811915a27af2d0a23f39.jpg" alt="Thumbnail 4" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">YouTube Thumbnail</div>
             <div class="gallery-title">ITS Academy Thumbnails</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -854,6 +858,16 @@
   <section id="motion">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 07 · Motion & Storytelling</div>
+        <h2 class="section-title">Visuals in <em>motion</em><br>and stories.</h2>
+        <p class="section-desc">A collection of motion graphics, promotional videos, and storytelling visual history designed for Wafilife and other creative campaigns.</p>
+      </div>
+      <div class="motion-grid">
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/XMk9lBTKtvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/_LYxnJ2IvoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/5GnEbNhKqW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/wyFkxbF5IBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      </div>
     </div>
   </section>
 
@@ -861,12 +875,12 @@
   <section id="brand">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 08 · Brand Identity</div>
         <h2 class="section-title">Crafting <em>identities</em><br>from scratch.</h2>
       </div>
       <div class="gallery-grid">
         <!-- Frizo -->
         <a href="https://www.facebook.com/frizobd" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/7744da34-e38f-4b59-ba24-3dacba72b87c.jpg?auth_key=1886009995-564473e03f2e43a88dbf11a5915426ef-0-a7a55888fc4e1881339b722415b738dd" alt="Frizo">
           <img src="https://z-cdn-media.chatglm.cn/files/7744da34-e38f-4b59-ba24-3dacba72b87c.jpg?auth_key=1886009995-564473e03f2e43a88dbf11a5915426ef-0-a7a55888fc4e1881339b722415b738dd" alt="Frizo" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Branding · Logo Design</div>
@@ -874,10 +888,8 @@
             <div class="gallery-desc">A modern and refreshing brand identity focusing on clean typography and a vibrant palette.</div>
           </div>
         </a>
-
         <!-- Ecommetrix -->
         <a href="https://www.facebook.com/ecommetrix/" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/362a218e-79cb-44fd-8828-118a4ed4d6ee.jpg?auth_key=1886009995-4106b355c6bb47f091923aa29bf961ac-0-c11b08aead4db9e41ac9a2ddebd0bbf6" alt="Ecommetrix">
           <img src="https://z-cdn-media.chatglm.cn/files/362a218e-79cb-44fd-8828-118a4ed4d6ee.jpg?auth_key=1886009995-4106b355c6bb47f091923aa29bf961ac-0-c11b08aead4db9e41ac9a2ddebd0bbf6" alt="Ecommetrix" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Corporate · Visual Identity</div>
@@ -885,10 +897,8 @@
             <div class="gallery-desc">Complete visual identity for an e-commerce solutions provider, featuring a sleek and corporate logo design.</div>
           </div>
         </a>
-
         <!-- 5menstudio -->
         <a href="https://www.facebook.com/fivemenstudiobd" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/3f841273-9ee1-45db-9e9a-7f13caa3f7a0.jpg?auth_key=1886009995-420be103d2984493a526d0b9158103c7-0-2924b15cbf949d887a86c349fba2401c" alt="5menstudio">
           <img src="https://z-cdn-media.chatglm.cn/files/3f841273-9ee1-45db-9e9a-7f13caa3f7a0.jpg?auth_key=1886009995-420be103d2984493a526d0b9158103c7-0-2924b15cbf949d887a86c349fba2401c" alt="5menstudio" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Creative · Studio Branding</div>
@@ -896,10 +906,8 @@
             <div class="gallery-desc">Creative logo and brand identity for a dynamic production house, emphasizing a minimalist and bold aesthetic.</div>
           </div>
         </a>
-
         <!-- Future IT Farm (New) -->
         <a href="https://www.behance.net/gallery/229444895/Future-IT-Brand-Identity-Design?platform=direct" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/49ccbae8-b9b6-4459-b1b1-76f84ba39de3.jpg?auth_key=1886009995-2b9c0d4864de48deb1d9363d74638886-0-2eabe58125d2bd14b91d8193be4adcb6" alt="Future IT Farm">
           <img src="https://z-cdn-media.chatglm.cn/files/49ccbae8-b9b6-4459-b1b1-76f84ba39de3.jpg?auth_key=1886009995-2b9c0d4864de48deb1d9363d74638886-0-2eabe58125d2bd14b91d8193be4adcb6" alt="Future IT Farm" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">IT Firm · Web Services</div>
@@ -907,10 +915,8 @@
             <div class="gallery-desc">Brand identity design for an IT-related web service provider, featuring a sleek and modern corporate logo.</div>
           </div>
         </a>
-
         <!-- Flyfanush (New) -->
         <a href="https://www.facebook.com/flyfanush" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/9dc5d2d2-3379-48a7-aab5-c47c646a3ba2.jpg?auth_key=1886009995-c5da5a1e00df4c45a6ba7078bc729e9b-0-cb0999bd524dd46ddd944cd94684c904" alt="Flyfanush">
           <img src="https://z-cdn-media.chatglm.cn/files/9dc5d2d2-3379-48a7-aab5-c47c646a3ba2.jpg?auth_key=1886009995-c5da5a1e00df4c45a6ba7078bc729e9b-0-cb0999bd524dd46ddd944cd94684c904" alt="Flyfanush" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">E-commerce · Branding</div>
@@ -918,10 +924,8 @@
             <div class="gallery-desc">Complete brand identity design for a dynamic e-commerce platform, featuring a minimalist and modern aesthetic.</div>
           </div>
         </a>
-
         <!-- Kothabondhu (New) -->
         <a href="https://www.facebook.com/kothabondhuDU" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/c43c3b80-5077-4e33-af18-0dafdfad9511.jpg?auth_key=1886009995-ec72bb38ace3481f9a48afef64c31ba5-0-78cf30b0a7b438c8148812cfa2b1aa00" alt="Kothabondhu">
           <img src="https://z-cdn-media.chatglm.cn/files/c43c3b80-5077-4e33-af18-0dafdfad9511.jpg?auth_key=1886009995-ec72bb38ace3481f9a48afef64c31ba5-0-78cf30b0a7b438c8148812cfa2b1aa00" alt="Kothabondhu" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Teletherapy · Health</div>
@@ -929,14 +933,16 @@
             <div class="gallery-desc">Visual identity design for a teletherapy service supporting individuals with communication problems.</div>
           </div>
         </a>
-
         <!-- Aiyaan (Updated Description) -->
         <a href="https://www.facebook.com/shopaiyaan" target="_blank" class="gallery-item reveal">
-          <img src="https://z-cdn-media.chatglm.cn/files/1f0a5393-ffce-470a-b88c-2d34c6a4124b.jpg?auth_key=1886009995-64b5cd6725c143ee8416e8ea62ac829a-0-99bb589e71a8aa64b3b6d3f35e34983e" alt="Aiyaan">
           <img src="https://z-cdn-media.chatglm.cn/files/1f0a5393-ffce-470a-b88c-2d34c6a4124b.jpg?auth_key=1886009995-64b5cd6725c143ee8416e8ea62ac829a-0-99bb589e71a8aa64b3b6d3f35e34983e" alt="Aiyaan" loading="lazy">
           <div class="gallery-overlay">
             <div class="gallery-cat">Home Decor · Creative Direction</div>
             <div class="gallery-title">Aiyaan</div>
+            <div class="gallery-desc">Complete brand identity design for a home decor company. Currently working here as the Creative Director.</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -944,6 +950,35 @@
   <section id="education">
     <div class="container">
       <div class="section-header reveal">
+        <div class="section-label"><span class="line"></span> 09 · Education</div>
+        <h2 class="section-title">Foundations in <em>science</em>,<br>fluent in <em>design</em>.</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">Jan '25 — Jan '26 · Ongoing</div>
+          <div class="edu-degree">MSS in Communication Disorders</div>
+          <div class="edu-school">University of Dhaka</div>
+          <span class="edu-pill">Master's</span>
+        </div>
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">Jan '20 — Jan '24</div>
+          <div class="edu-degree">BSS in Communication Disorders</div>
+          <div class="edu-school">University of Dhaka</div>
+          <span class="edu-pill">Bachelor's</span>
+        </div>
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">2019 · Higher Secondary Certificate</div>
+          <div class="edu-degree">HSC — Science</div>
+          <div class="edu-school">Govt Science College, Farmgate</div>
+          <span class="edu-pill gpa">GPA 5.00 / 5.00</span>
+        </div>
+        <div class="edu-card glass-card reveal">
+          <div class="edu-period">2017 · Secondary School Certificate</div>
+          <div class="edu-degree">SSC — Science</div>
+          <div class="edu-school">Govt Science School, Farmgate</div>
+          <span class="edu-pill gpa">GPA 5.00 / 5.00</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -951,27 +986,38 @@
   <section id="contact">
     <div class="container">
       <div class="contact-wrap reveal">
+        <div class="section-label" style="justify-content: center;"><span class="line"></span> 10 · Contact</div>
+        <h2 class="section-title">Let's create something<br><em>worth the orbit.</em></h2>
+        <div class="contact-links">
+          <a href="mailto:sdfahim4200@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> sdfahim4200@gmail.com</a>
+          <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="contact-link"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+          <a href="tel:+8801831141481" class="contact-link"><i class="fas fa-phone"></i> +880 1831 141481</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
   <div>© 2024 Syeed Hossain Fahim · Designed & coded in Dhaka</div>
-  <div>© 2026 Syeed Hossain Fahim · Designed & coded in Dhaka</div>
   <div class="footer-socials">
     <a href="#hero">Back to Top <i class="fas fa-arrow-up"></i></a>
   </div>
+</footer>
+
+<script>
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let cx = 0, cy = 0, rx = 0, ry = 0;
   
-
   document.addEventListener('mousemove', (e) => {
     cx = e.clientX; cy = e.clientY;
     cursorDot.style.left = cx + 'px';
     cursorDot.style.top = cy + 'px';
   });
+  
   function followRing() {
-    rx += (cx - rx) * 0.1;
-    ry += (cy - ry) * 0.1;
     rx += (cx - rx) * 0.16;
     ry += (cy - ry) * 0.16;
     cursorRing.style.left = rx + 'px';
@@ -979,34 +1025,28 @@
     requestAnimationFrame(followRing);
   }
   followRing();
-  document.querySelectorAll('a, button, .gallery-item, .skill-card, .edu-card, input, textarea').forEach(el => {
+  
   document.querySelectorAll('a, button, .gallery-item, .skill-card, .edu-card, .fact, .timeline-content').forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
   });
 
-  const orbs = [document.getElementById('orb1'), document.getElementById('orb2')];
+  const orbs = [document.querySelector('.orb-1'), document.querySelector('.orb-2')];
   const heroImage = document.getElementById('heroImage');
+  const topnav = document.getElementById('topnav');
+  const progressBar = document.getElementById('scrollProgress');
   
   // Mouse Parallax Logic
-  document.addEventListener('mousemove', (e) => {
-    // FIX: Stop parallax effect on mobile to prevent image shifting/cutting
-    if (window.innerWidth <= 900) return; 
-  const topnav = document.getElementById('topnav');
-
   document.addEventListener('mousemove', (e) => {
     if (window.innerWidth <= 900) return;
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
 
     orbs.forEach((orb, i) => {
-      const speed = (i + 1) * 15;
       const speed = (i + 1) * 14;
       orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
     });
 
-    if(heroImage) {
-      heroImage.style.transform = `translate(calc(-50% + ${x * -10}px), ${y * -10}px)`;
     if (heroImage) {
       heroImage.style.transform = `translate(calc(-50% + ${x * -8}px), ${y * -8}px)`;
     }
@@ -1015,12 +1055,10 @@
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = pct + '%';
-  });
     topnav.classList.toggle('scrolled', window.scrollY > 20);
   }, { passive: true });
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
         entry.target.style.transitionDelay = Math.min(i * 0.04, 0.24) + 's';
@@ -1028,8 +1066,6 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
   document.querySelectorAll('.reveal').forEach((el, index) => {
@@ -1039,3 +1075,9 @@
 
   const menuToggle = document.getElementById('menuToggle');
   const navLinks = document.getElementById('navLinks');
+  menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
