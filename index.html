@@ -182,7 +182,7 @@
     font-size: 16px; cursor: none;
   }
 
-  /* Hero Section */
+  /* Hero Section - Updated Image Size */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -196,12 +196,12 @@
   
   .hero-img-wrap {
     position: absolute;
-    top: 28px;
+    top: 0; /* Removed gap from top */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 1080px;
-    height: 86vh;
+    max-width: 1300px; /* Increased width for bigger image */
+    height: 95vh; /* Increased height */
     z-index: 1;
     pointer-events: none;
     transition: transform 0.55s var(--ease);
@@ -211,11 +211,11 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    object-position: bottom center;
+    object-position: center top; /* Moved to top to remove empty space */
     mix-blend-mode: darken;
     filter: contrast(1.12) saturate(1.08) drop-shadow(0 18px 50px rgba(4, 50, 127, 0.45));
-    -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 78%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
 
   .hero-content {
@@ -503,7 +503,7 @@
     }
     .hero-img-wrap {
       position: relative; top: 0; left: 0; transform: none !important;
-      width: 100%; max-width: 100%; height: 62vh; margin: 0 auto 16px; opacity: 0.96;
+      width: 100%; max-width: 100%; height: 70vh; margin: 0 auto 16px; opacity: 0.96; /* Increased height for mobile */
     }
     .hero-img-wrap img {
       object-fit: cover; object-position: top center;
