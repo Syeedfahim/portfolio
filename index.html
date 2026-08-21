@@ -52,7 +52,6 @@
   ::selection { background: rgba(91, 140, 255, 0.35); color: #fff; }
   a, button { -webkit-tap-highlight-color: transparent; }
 
-  /* Atmosphere */
   .noise, .vignette {
     pointer-events: none;
     position: fixed;
@@ -75,10 +74,7 @@
     border-radius: 50%; transform: translate(-50%, -50%);
     will-change: transform, width, height;
   }
-  .cursor-dot {
-    width: 7px; height: 7px; background: #fff;
-    box-shadow: 0 0 12px rgba(255,255,255,0.6);
-  }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; box-shadow: 0 0 12px rgba(255,255,255,0.6); }
   .cursor-ring {
     width: 38px; height: 38px;
     border: 1px solid rgba(255,255,255,0.28);
@@ -186,7 +182,7 @@
     font-size: 16px; cursor: none;
   }
 
-  /* Hero */
+  /* Hero Section */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -197,6 +193,7 @@
     position: relative;
     overflow: hidden;
   }
+  
   .hero-img-wrap {
     position: absolute;
     top: 28px;
@@ -229,7 +226,7 @@
     gap: 56px;
     align-items: end;
   }
-
+  
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 8px 16px;
@@ -486,6 +483,7 @@
   }
   .reveal.in-view { opacity: 1; transform: translateY(0); }
 
+  /* Mobile Responsive Fixes */
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .menu-toggle { display: grid; place-items: center; cursor: pointer; }
@@ -537,8 +535,8 @@
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<div class="orb orb-1" id="orb1"></div>
-<div class="orb orb-2" id="orb2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <nav class="topnav" id="topnav">
@@ -564,6 +562,7 @@
 
 <main>
 
+  <!-- HERO -->
   <section id="hero" class="hero">
     <div class="hero-img-wrap reveal" id="heroImage">
       <img src="https://z-cdn-media.chatglm.cn/files/0ba41af6-836b-432f-9256-e0e550ebdf2b.png?auth_key=1884706798-d364523f01924a7f9aaba6d03ff49115-0-562e9c473a60a8b3157e6ef00492df03" alt="Syeed Hossain Fahim">
@@ -581,12 +580,8 @@
         <div class="hero-right">
           <p>I'm <strong>Syeed Hossain Fahim</strong> — blending design and content development. Currently serving as Content Developer at <strong>lustmanager.com</strong>, while exploring the intersection of AI, visuals, and storytelling.</p>
           <div class="hero-actions">
-            <a href="#gallery" class="btn btn-primary">
-              View Work <i class="fas fa-arrow-right"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="btn btn-ghost">
-              LinkedIn <i class="fab fa-linkedin-in"></i>
-            </a>
+            <a href="#gallery" class="btn btn-primary">View Work <i class="fas fa-arrow-right"></i></a>
+            <a href="https://www.linkedin.com/in/syeedfahim/" target="_blank" class="btn btn-ghost">LinkedIn <i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
       </div>
@@ -594,6 +589,7 @@
     <div class="scroll-hint"><span></span> Scroll</div>
   </section>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="container">
       <div class="section-header reveal">
@@ -603,7 +599,7 @@
       <div class="about-text reveal">
         <p>I'm a creative and results-driven professional with a strong foundation in graphic design and content development. I deliver high-quality visual content and strategic narratives for e-commerce, social media, and brand campaigns.</p>
         <p>Proficient in <strong>Adobe Photoshop, Illustrator, After Effects, CapCut</strong>, and AI-powered tools, I've managed brand identity independently as a founder, and worked collaboratively within fast-paced teams. I am currently pursuing a Master's in Communication Disorders at the University of Dhaka.</p>
-
+        
         <div class="facts-grid">
           <div class="fact">
             <div class="label">Currently</div>
@@ -611,7 +607,7 @@
           </div>
           <div class="fact">
             <div class="label">Founded</div>
-            <div class="value"><i class="fas fa-store" style="margin-right:8px; color:var(--glow-blue);"></i>Aiyaan Home Decor</div>
+            <div class="value"><i class="fas fa-store" style="margin-right:8px; color:var(--glow-blue);"></i>Aiyaan Lifestyle</div>
           </div>
           <div class="fact">
             <div class="label">Studying</div>
@@ -626,6 +622,7 @@
     </div>
   </section>
 
+  <!-- SOFTWARE & TOOLS -->
   <section id="software">
     <div class="container">
       <div class="section-header reveal">
@@ -657,6 +654,7 @@
     </div>
   </section>
 
+  <!-- AI SKILLS & WORKFLOW -->
   <section id="ai-skills">
     <div class="container">
       <div class="section-header reveal">
@@ -698,6 +696,7 @@
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="container">
       <div class="section-header reveal">
@@ -719,19 +718,6 @@
           </div>
         </div>
         <div class="timeline-item reveal">
-          <div class="timeline-date">Aug '24 — Jun '26</div>
-          <div class="timeline-content glass-card">
-            <div class="timeline-role">Graphics Designer</div>
-            <div class="timeline-company">Wafilife - E-commerce Platform · Dhaka</div>
-            <div class="timeline-desc">
-              <ul>
-                <li>Designed promotional banners, product visuals, and campaign creatives.</li>
-                <li>Produced AI-assisted video content and motion graphics for social media.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="timeline-item reveal">
           <div class="timeline-date">Mar '21 — Present <span class="now-pill">NOW</span></div>
           <div class="timeline-content glass-card">
             <div class="timeline-role">Creative Director & Founder</div>
@@ -740,6 +726,19 @@
               <ul>
                 <li>Founded and led a home decor brand, independently managing all creative direction.</li>
                 <li>Currently working here, overseeing product packaging and social media campaigns.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-date">Aug '24 — Jun '26</div>
+          <div class="timeline-content glass-card">
+            <div class="timeline-role">Graphics Designer</div>
+            <div class="timeline-company">Wafilife - E-commerce Platform · Dhaka</div>
+            <div class="timeline-desc">
+              <ul>
+                <li>Designed promotional banners, product visuals, and campaign creatives.</li>
+                <li>Produced AI-assisted video content and motion graphics for social media.</li>
               </ul>
             </div>
           </div>
@@ -761,6 +760,7 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
   <section id="gallery">
     <div class="container">
       <div class="section-header reveal">
@@ -814,6 +814,7 @@
     </div>
   </section>
 
+  <!-- THUMBNAIL DESIGN -->
   <section id="thumbnails">
     <div class="container">
       <div class="section-header reveal">
@@ -853,6 +854,7 @@
     </div>
   </section>
 
+  <!-- MOTION -->
   <section id="motion">
     <div class="container">
       <div class="section-header reveal">
@@ -864,11 +866,12 @@
         <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/XMk9lBTKtvU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/_LYxnJ2IvoQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/5GnEbNhKqW0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/wyFkxbF5IBo?si=xsATBG3V4d_m9rxG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-card reveal"><iframe src="https://www.youtube.com/embed/wyFkxbF5IBo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
       </div>
     </div>
   </section>
 
+  <!-- BRAND IDENTITY -->
   <section id="brand">
     <div class="container">
       <div class="section-header reveal">
@@ -876,6 +879,7 @@
         <h2 class="section-title">Crafting <em>identities</em><br>from scratch.</h2>
       </div>
       <div class="gallery-grid">
+        <!-- Frizo -->
         <a href="https://www.facebook.com/frizobd" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/7744da34-e38f-4b59-ba24-3dacba72b87c.jpg?auth_key=1886009995-564473e03f2e43a88dbf11a5915426ef-0-a7a55888fc4e1881339b722415b738dd" alt="Frizo" loading="lazy">
           <div class="gallery-overlay">
@@ -884,6 +888,7 @@
             <div class="gallery-desc">A modern and refreshing brand identity focusing on clean typography and a vibrant palette.</div>
           </div>
         </a>
+        <!-- Ecommetrix -->
         <a href="https://www.facebook.com/ecommetrix/" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/362a218e-79cb-44fd-8828-118a4ed4d6ee.jpg?auth_key=1886009995-4106b355c6bb47f091923aa29bf961ac-0-c11b08aead4db9e41ac9a2ddebd0bbf6" alt="Ecommetrix" loading="lazy">
           <div class="gallery-overlay">
@@ -892,6 +897,7 @@
             <div class="gallery-desc">Complete visual identity for an e-commerce solutions provider, featuring a sleek and corporate logo design.</div>
           </div>
         </a>
+        <!-- 5menstudio -->
         <a href="https://www.facebook.com/fivemenstudiobd" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/3f841273-9ee1-45db-9e9a-7f13caa3f7a0.jpg?auth_key=1886009995-420be103d2984493a526d0b9158103c7-0-2924b15cbf949d887a86c349fba2401c" alt="5menstudio" loading="lazy">
           <div class="gallery-overlay">
@@ -900,6 +906,7 @@
             <div class="gallery-desc">Creative logo and brand identity for a dynamic production house, emphasizing a minimalist and bold aesthetic.</div>
           </div>
         </a>
+        <!-- Future IT Farm (New) -->
         <a href="https://www.behance.net/gallery/229444895/Future-IT-Brand-Identity-Design?platform=direct" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/49ccbae8-b9b6-4459-b1b1-76f84ba39de3.jpg?auth_key=1886009995-2b9c0d4864de48deb1d9363d74638886-0-2eabe58125d2bd14b91d8193be4adcb6" alt="Future IT Farm" loading="lazy">
           <div class="gallery-overlay">
@@ -908,6 +915,7 @@
             <div class="gallery-desc">Brand identity design for an IT-related web service provider, featuring a sleek and modern corporate logo.</div>
           </div>
         </a>
+        <!-- Flyfanush (New) -->
         <a href="https://www.facebook.com/flyfanush" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/9dc5d2d2-3379-48a7-aab5-c47c646a3ba2.jpg?auth_key=1886009995-c5da5a1e00df4c45a6ba7078bc729e9b-0-cb0999bd524dd46ddd944cd94684c904" alt="Flyfanush" loading="lazy">
           <div class="gallery-overlay">
@@ -916,6 +924,7 @@
             <div class="gallery-desc">Complete brand identity design for a dynamic e-commerce platform, featuring a minimalist and modern aesthetic.</div>
           </div>
         </a>
+        <!-- Kothabondhu (New) -->
         <a href="https://www.facebook.com/kothabondhuDU" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/c43c3b80-5077-4e33-af18-0dafdfad9511.jpg?auth_key=1886009995-ec72bb38ace3481f9a48afef64c31ba5-0-78cf30b0a7b438c8148812cfa2b1aa00" alt="Kothabondhu" loading="lazy">
           <div class="gallery-overlay">
@@ -924,6 +933,7 @@
             <div class="gallery-desc">Visual identity design for a teletherapy service supporting individuals with communication problems.</div>
           </div>
         </a>
+        <!-- Aiyaan (Updated Description) -->
         <a href="https://www.facebook.com/shopaiyaan" target="_blank" class="gallery-item reveal">
           <img src="https://z-cdn-media.chatglm.cn/files/1f0a5393-ffce-470a-b88c-2d34c6a4124b.jpg?auth_key=1886009995-64b5cd6725c143ee8416e8ea62ac829a-0-99bb589e71a8aa64b3b6d3f35e34983e" alt="Aiyaan" loading="lazy">
           <div class="gallery-overlay">
@@ -936,6 +946,7 @@
     </div>
   </section>
 
+  <!-- EDUCATION -->
   <section id="education">
     <div class="container">
       <div class="section-header reveal">
@@ -971,6 +982,7 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <div class="contact-wrap reveal">
@@ -988,7 +1000,7 @@
 </main>
 
 <footer>
-  <div>© 2026 Syeed Hossain Fahim · Designed & coded in Dhaka</div>
+  <div>© 2024 Syeed Hossain Fahim · Designed & coded in Dhaka</div>
   <div class="footer-socials">
     <a href="#hero">Back to Top <i class="fas fa-arrow-up"></i></a>
   </div>
@@ -998,12 +1010,13 @@
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
   let cx = 0, cy = 0, rx = 0, ry = 0;
-
+  
   document.addEventListener('mousemove', (e) => {
     cx = e.clientX; cy = e.clientY;
     cursorDot.style.left = cx + 'px';
     cursorDot.style.top = cy + 'px';
   });
+  
   function followRing() {
     rx += (cx - rx) * 0.16;
     ry += (cy - ry) * 0.16;
@@ -1012,29 +1025,33 @@
     requestAnimationFrame(followRing);
   }
   followRing();
+  
   document.querySelectorAll('a, button, .gallery-item, .skill-card, .edu-card, .fact, .timeline-content').forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('expand'));
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('expand'));
   });
 
-  const orbs = [document.getElementById('orb1'), document.getElementById('orb2')];
+  const orbs = [document.querySelector('.orb-1'), document.querySelector('.orb-2')];
   const heroImage = document.getElementById('heroImage');
   const topnav = document.getElementById('topnav');
-
+  const progressBar = document.getElementById('scrollProgress');
+  
+  // Mouse Parallax Logic
   document.addEventListener('mousemove', (e) => {
     if (window.innerWidth <= 900) return;
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
     const y = (e.clientY / window.innerHeight - 0.5) * 2;
+
     orbs.forEach((orb, i) => {
       const speed = (i + 1) * 14;
       orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
     });
+
     if (heroImage) {
       heroImage.style.transform = `translate(calc(-50% + ${x * -8}px), ${y * -8}px)`;
     }
   });
 
-  const progressBar = document.getElementById('scrollProgress');
   window.addEventListener('scroll', () => {
     const pct = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight)) * 100;
     progressBar.style.width = pct + '%';
